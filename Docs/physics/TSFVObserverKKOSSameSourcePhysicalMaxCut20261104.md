@@ -1,0 +1,83 @@
+## Follow-up exact BIDI nonpromotion results — 4 November 2026
+
+The completed 186-row source/kernel/physical status appendix is in the canonical `Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md`. New original source-owned implementations preserve #1460 vs #1444 ownership.
+
+- **Observer spatial measurement necessary condition:** original finite diamond x/y/z cannot be recovered from original filtration; any additional measured sensor whose output plus filtration reconstructs all three events must distinguish x/y, x/z and y/z pairwise. `TSFVOriginalFiltrationFiniteCausalDiamondNonpromotionExact.originalSpatialSensorNeedsThreePairwiseDistinctReadouts` is a finite, legacy-import NON-GOLDEN negative/necessity theorem.
+- **KK inverse problem:** `TSFVKKHorizontalReductionNoninjectiveBidiExact` proves horizontal g4 is independent of the original 5D fibre radius and chart connection. An actual full 5D vertical radius readout yields b²; a mixed offdiagonal difference yields A(v) at unit radius. This is **not** an actual physical 5D solution or uniqueness up to gauge/diffeomorphism, and global gauge-equivalent chart connections must not be counted as physically distinct.
+- **OS/Stone inverse problem:** `TSVFOSSelectedKetHamiltonianNonpromotionExact` supplies two explicit symmetric rational H that agree on one ket but not on the whole operator. This blocks promotion of `originalForwardKetPhysicalEnergyIntertwines` to self-adjoint/spectral/unitary-on-Hilbert equality without a real dense domain and physical J.
+
+Independent equivalent exact tests: 24,000 KK radius, 36,000 chart connection and 12,000 two-mode Hamiltonian-symmetry cases PASS. Golden compiler absent; no source/kernal or physical promotion claimed. Full backward/falsification ledger: [Physical Completion Bidirectional Steelman](TSFVPhysicalCompletionBidirectionalSteelmanExactCut20261104.md).
+
+
+## 4 November 2026 — further P01/P02/P03/P07/P08 same-source max-cut
+
+**P01/P02 original finite diamond:** New source owner DASHI/Physics/Foundations/TSFVOriginalFiltrationFiniteCausalDiamondNonpromotionExact.agda imports the *existing* DASHI.Geometry.FiniteCausalDiamond, maps all seven original diamond causal edges to the existing observer-visibility preorder, and proves no decoder of only the original three filtration levels can distinguish the genuine diamond x/y spatial branches. The earlier three-element observer information chain is a true finite order, but not a physical measurement or derivation of three spatial dimensions. The original diamond itself supplies three branches as a chosen finite model, not a measured 4D continuum. This new module is intentionally non-Golden because the original diamond owner is not known transitively safe.
+
+**P02/P08 exact KK 5D congruence:** New Golden-candidate owner DASHI/Physics/Foundations/TSFVKKFiveMetricInvertibleShearExact.agda consumes the earlier horizontal KK Schur bilinear and constructs both inverses of the actual coordinate shear. In mathematical notation,
+
+\[
+L_A(v,s)=(v,s+A(v)),\quad L_A^{-1}(v,u)=(v,u-A(v)),\qquad
+G_5(\xi,\eta)=(g_4\oplus b^2)(L_A\xi,L_A\eta).
+\]
+
+The bilinear equality and horizontal internal-coordinate cancellation are proved pointwise for arbitrary rational g4, connection A (including nonzero A) and b². This gives invertible congruence, not merely signature counts; positive physical radion, actual selected smooth 5D metric/bundle, observer-measured physical g4, same-action Einstein source and global index remain UNSUPPLIED. A Lorentzian (1 time, 4 spaces) conclusion requires physically supplied nondegenerate (1 time, 3 spaces) g4 and b²>0 plus inertia theory.
+
+**P03/P07 original real-time generator:** New Golden-candidate owner DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda consumes the ORIGINAL TSVFOSSameSelectedClockIterateExact.OriginalTSVFToOSClock, its actual observer embedding J, and the original OS.hamiltonian reconstruction. It derives the sampled strong-difference-quotient intertwiner from the same real-time evolution intertwinement and linearity; selected strong-limit transport/uniqueness then derives the derivative generator identity (rather than assuming it). A second theorem derives **energy H** intertwinement using source-calibrated complex linearity of J and the factor i*hbar:
+
+\[
+K=\left.\frac{dU(t)}{dt}\right|_{t=0}=-iH/\hbar,\quad H=i\hbar K,\quad
+JH_{\mathrm{observer}}\psi=H_{\mathrm{OS}}J\psi.
+\]
+
+This is CONDITIONAL on physically constructing complete noncollapsed observer/OS Hilbert spaces, real strongly continuous unitaries, the correct difference-quotient/dense domain topology, the meaning of the ORIGINAL OS H as a self-adjoint energy operator, SI time scaling, and Wick spectral continuation. It deliberately does NOT assert real-time U equals Euclidean T on excited states.
+
+**Independent references:** equivalent local Python verified the 27 filtration transitivity triples, all seven original finite-diamond edges, 40,000 exact rational KK horizontal/gauge identities, another 20,000 exact rational invertible KK shear/congruence identities, plus finite C² noncollapsed Hilbert time-unitary/common-generator and Euclidean-contraction *numerical* comparisons. The GitHub reference script scripts/check_tsfv_observer_kk_os_same_source_20261104.py now includes these additions but its exact checkout was not executed. Reference checks are neither physical 4D YM/OS construction nor Agda kernel acceptance.
+
+**Governance and remaining cut:** Original 186 P00–P11 IDs preserved. The non-Golden finite-diamond file stays out of the --safe regression root; two new source-written Golden candidates are exported. No local postulates, holes or termination overrides; no agda compiler in runtime, so KERNEL PENDING. Physically remaining: select genuine observer-based local propagation and 4D causal symbol/dimension; build and verify the same selected 5D Einstein/KK metric/action and observed reduced bilinear; construct actual noncollapsed Hilbert/Stone/OS strong generator, domains, spectrum and continuation. Standalone Yang-Mills R443/R445/R320/R333/Clay remains with the other worker.
+
+
+# 4 November 2026 — original observer → (3,1) → KK horizontal metric → same OS generator
+
+**Owner:** [Agda PR #1460](https://github.com/chboishabba/dashi_agda/pull/1460), `research/lorentz31-directional-kk-ym-20261103`. The independent [YM PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444) worker owns R443/R445/R320/R333/Clay; no child-to-parent imports or duplicated YM analytics.
+
+## Original source reuse / exact new owners
+
+| ID | Actual original owner / new theorem | What is mathematically proved | Open physical producer |
+|---|---|---|---|
+| P01.L06–L10 / P02.L01 | `HistoryWeightFiltrationExact.visibleAt` + new `TSFVOriginalObserverVisibilityCausalOrderExact` | Event-access inclusion from original three filtration levels is reflexive/transitive/antisymmetric, with strict original events witnessing `initial<intermediate<terminal`; reverse arrows impossible | Physical local causal order from interactions/signals on chosen observer history, continuum |
+| P01.L06–L10 | Original `FiniteHistoryOrientationExact`, `TSFVOriginalHiddenHistoryFiltrationWeldExact` + old `SectionedProjectionProvenanceBridgeExact`, instantiated by new `TSFVOriginalObserverSectionedProjectionReuseExact` | Past projection has a genuine section; old `fibreConstantObservableReconstructsFromSection` recovers the selected past observable. The actual late terminal observable is **not fibre-constant**, a coarse-only decoder fails, while the old `ResidualReopening` is populated by the literal terminal-access coordinate | Physically selected quantum records/decoherence/ABL pointer and conditional expectation in actual Hilbert, all-scale source |
+| P01→P02 | `TSFVObservedPhysicalAccessTransportExact` uses original `SelectedTSFVToLorentzPhysicalSource.filtrationIsSameSource` | The actual observed-event access order at the selected state is **equivalent both ways** to the original filtration. Same-source strict event access and terminal probe are derived, not assigned a second arrow | Inhabit the physical source record from measured dynamics and establish its causal metric/cone/dimension/principal symbol |
+| P02.L09–L11 / P08.L02, L04 | Original KK #1239/#1241 classical Jordan ansatz + `TSFVKKSelectedHorizontalMetricSchurExact` | For arbitrary selected four-bilinear `g4`, KK connection `A`, circle quadratic `b²`, the full five-bilinear `G5((v,s),(w,t))=g4(v,w)+b²(s+A(v))(t+A(w))` restricts **exactly** to `g4` on horizontal lifts `s=-A(v)`, including all nonzero mixed components and fibre-gauge covariance. Freezing the fibre coordinate `s=t=0` instead leaves the `b² A(v)A(w)` term | Physical 5D solution, actual smooth bundle, global gauge/frame, positive radius/stress and selected observer quadratic |
+| P02/P07/P08.L12 | `SameMetricTSFVKK`, `TSFVKKSameArrowQuadraticMetricWeldExact` + `TSFVKKActualSelectedMetricHorizontalWeldExact` | Once the **actual selected 5D metric** is identified with the KK block bilinear and the **actual observer bilinear** with its selected 4D reduction, the previously original same-metric source yields `G5_selected(horizontal, horizontal)=g_observed(selectedState)=g4(reduce(G5_selected))`; and the independently held TSFV/KK calibrated probes choose the **same actual timelike axis** | **Two deliberately explicit physical proof leaves:** selected metric 5D really has the KK bilinear, and the measured observer quadratic is that very reduced 4D bilinear; existing record remains uninhabited physically |
+| P03.L09–11 / P07.L05–11 | `TSVFOSSameSelectedClockIterateExact` original `oneStepIntertwines`, OS R331 indexed H, + `TSVFOSRealEuclideanTimeSeparationExact` | A genuinely norm-isometric observer/OS state identification and norm-preserving real-time observer step **cannot** intertwine a strictly norm-contracting Euclidean OS positive-time step on a selected excited state. Proof applies **to the existing original clock record**, not an invented replacement. A separate finite rank-drop witness is an independent qualitative control | Selected noncollapsed OS Hilbert; matched physical time units; strongly continuous real-time `e^{-itH/ħ}`; Euclidean `e^{-τH/ħ}` for SI-time τ; common dense self-adjoint H domain, spectral calculus, continuation and physical gauge-state correspondence |
+
+**Crucial correction:** `OriginalTSVFToOSClock.osStep` is merely a supplied state transformation. Its existing Nat-iterate equality is valid as algebra; it is NOT, without extra hypotheses, an equality between the physical Euclidean OS contraction `T(τ)` and real-time unitary `U(t)`. In a positive-energy sector these two are norm-distinct. The P07 theorem must identify a **single physical self-adjoint generator** through a real-time unitary equivalence and a correct OS/Wick analytic continuation. Any genuinely selected OS Hamiltonian must have an actual operator/domain, not just `OSReconstructionAuthority.Hamiltonian : Set` and a named element.
+
+## Mathematical proof statements and negative controls
+
+**P01 operational access:** for original levels `a,b` define `a ⊑obs b` iff every event true at `a` is true at `b`. Existing original `History.visibleAt` determines every case, including terminal event being false before the last level and true thereafter. It is a **finite three-element chain**, not a measured Lorentzian light cone. The original hidden-history selections share a past record and split in the terminal residual; no coarse past-only reconstruction exists. No backwards intervention or entropy-to-MDL equivalence follows.
+
+**P08 metric:** the Jordan KK circle block `g5` is a bilinear algebraic ansatz, whose horizontal lift is selected by the SAME connection `A`. The actual independent classical source #1239/#1241 involves radion, Einstein/Jordan frame, physical matter couplings and known charge/zero-mode caveats: the algebraic reduction theorem does **not** establish their equations of motion or the full 5D action. Its `b²` formal scalar is not automatically physically positive; positivity, global smooth circle and Cauchy properties remain inputs. The Yang–Mills worker's R443–R333 pure 4D sector is independent of KK.
+
+**P07 Wick/Stone:** for a common positive self-adjoint H,
+\[
+ T(\tau)=e^{-\tau H/\hbar},\qquad
+ U(t)=e^{-itH/\hbar}.
+\]
+For Euclidean time \(\tau\) measured in seconds, \(T(\tau)=e^{-\tau H/\hbar}\); equivalently \(T(s)=e^{-sH}\) for the inverse-energy parameter \(s=\tau/\hbar\). A strictly decaying nonvacuum OS state has `||T(τ)ψ||<||ψ||` while `||U(t)ψ||=||ψ||`; a norm-preserving onto identification cannot map one positive-time operator directly to the other. The source-written no-go accepts exactly the actual old `OriginalTSVFToOSClock` and proves `⊥` from its direct step intertwiner plus physical isometry/strict-decay evidence. This avoids a central **false proof promotion**. The finite permutation/rank-drop example is not a finite-positive-τ exponential, only a qualitative logical witness.
+
+## Numerical reference, provenance, trust
+
+`scripts/check_tsfv_observer_kk_os_same_source_20261104.py` implements independent deterministic exact `Fraction` tests for 27 original filtration transitivity triples, three strict event witnesses, 8,000 source-like 4D-vector/radion/connection samples × five KK Schur/expand/freeze/gauge/horizontal-shift equalities = **40,000 exact rational identities**, a nonzero connection naive-fibre negative test, and a three-state norm-preserving-versus-contracting discrete negative control. An equivalent local Python check executed and passed. The precise committed GitHub script is stored as a reproducible reference and has NOT been checkout-executed. No numerical reference is a kernel receipt.
+
+**SOURCE ≠ KERNEL ≠ PHYSICAL.** The new Agda files are source-written with GitHub blob readback. Golden headers are used only on the self-contained imported-safe subsets; the observer SectionedProjection adapter is deliberately non-Golden because its prior owner imports legacy surfaces without a certified transitive safe chain. `agda` binary not present locally. Zero local postulates/holes/TERMINATING override is not a proof that the imported real-analysis/Stone/OS sources are axiom-free or that the compiler accepts the new source.
+
+**No change to 186 original P00–P11 IDs.** In particular P01 physical manybody postselection/correlation-error rate remains open despite the other worker's new `TSVF2017ControlledComplexOrderedRateBridgeExact` and `ControlledCorrelationBornError` numerical bounds. Reuse their exact same Q.ABL and environmental sources; never infer physical independence from marginals.
+
+## Remaining real maximum-cut owners (this worker only)
+
+1. **P01→P02:** actually select a physical microscopic quantum/history preparation and causal intervention observable, prove the induced operational order extends the finite access source and converges to a smooth dimension-4 physically measured light cone/quadratic with propagation bounds. A constant original `ShiftArrow=0` cannot be that measurement.
+2. **P02→P08:** construct the actual coupled selected 5D source (bundle/metric/radion/connection/action/variation/boundaries) and prove the two explicitly named bilinear matching inputs of `TSFVKKActualSelectedMetricHorizontalWeldExact` from it; verify stress/decoupling and preserve a single time direction.
+3. **P03→P07:** actual selected physical complex Hilbert representation of the observer and OS reconstruction, densely defined self-adjoint common H, strong real-time continuity, a unitary onto intertwinement on common core, matched time scale, spectral projections and analytic continuation of OS Euclidean semigroup. Avoid direct `T(τ)=U(t)` on excited sectors.
+
+The other worker owns the independent 4D SU(N) R443/R445/R320/R333/Clay theorem. Credit original Aharonov–Bergmann–Lebowitz/Aharonov–Vaidman, Lorentz/Sylvester/Minkowski, Kaluza/Klein, Osterwalder–Schrader, Stone and the existing DASHI exact theorem owners.
