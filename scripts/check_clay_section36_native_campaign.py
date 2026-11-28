@@ -44,6 +44,7 @@ ROOTS = {
  ]),
  "NS": ("ns_root", [
   "Synthesis/ClayNSSection36FullSameFlowCompactnessAcceptanceExact.lean",
+  "Synthesis/ClayNSSection38EpsilonRadiusAcceptanceExact.lean",
  ]),
  "BSD_HODGE": ("bsd_hodge_root", [
   "Synthesis/ClayBSDSection36AllDegreeMellinEnvelopeAcceptanceExact.lean",
@@ -54,6 +55,7 @@ ROOTS = {
  "PNP": ("pnp_root", [
   "Welds/PNPSection36SameObligationInputVsWorkAcceptanceExact.lean",
   "Welds/PNPSection37ExternalObservationAcceptanceExact.lean",
+  "Welds/PNPSection38PreterminalExternalObservationAcceptanceExact.lean",
  ]),
 }
 
@@ -144,7 +146,7 @@ def main() -> int:
         help="Mandatory immutable Git HEAD pin, once per YM,NS,BSD_HODGE,PNP,RH")
     p.add_argument("--timeout", type=int, default=90)
     args = p.parse_args()
-    report = {"schema": "Clay37NativeAcceptanceV1",
+    report = {"schema": "Clay38NativeAcceptanceV1",
               "all_selected_roots_passed": False, "roots": {}, "checks": [],
               "meaning": "Selected finite theorem roots only; not universal Clay completion"}
     pins = {}
@@ -215,13 +217,13 @@ def main() -> int:
         r = call(command, rhroot, args.timeout)
         report["checks"].append({"owner": "RH",
           "status": "PASS" if r["exit"] == 0 else "FAIL", "result": r})
-    report["all_selected_roots_passed"] = (len(report["checks"]) == 12
+    report["all_selected_roots_passed"] = (len(report["checks"]) == 14
         and all(v.get("ok", False) for v in report["roots"].values())
         and all(v.get("status") == "PASS" for v in report["checks"]))
     out = args.report.resolve()
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf8")
-    print("ALL-CLAY SECTION37 SELECTED ROOTS",
+    print("ALL-CLAY SECTION38 SELECTED ROOTS",
           "PASS" if report["all_selected_roots_passed"] else "FAIL",
           "checks", len(report["checks"]), "receipt", out)
     return 0 if report["all_selected_roots_passed"] else 2
