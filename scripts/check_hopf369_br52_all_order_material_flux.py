@@ -132,7 +132,7 @@ def negative():
     N,H,v,Hi,D,Ninv2,Fspace,Ftime,theta,kt,ks=src
     # A moving time graph or material normal shift is not a disposable
     # source. Construct independent contrasts against frozen F=n.
-    assert ktime:=any(x!=0 for x in kt)
+    assert any(x!=0 for x in kt)
     jt=[field_jet(0,0,i) for i in range(5)]
     raw=raw_flux(src,jt)
     gaussian=mul(D,jt[4])
