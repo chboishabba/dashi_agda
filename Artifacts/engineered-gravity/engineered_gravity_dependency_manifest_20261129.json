@@ -411,6 +411,19 @@
       "physical_paid": false,
       "source_git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c",
       "checker_git_blob_sha1": "ffc4b7dc9d5ee0b21f763b4aff816180342bef4c"
+    },
+    "dynamic_tov_flux_israel": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G4_Einstein_RMHD"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_dynamic_flux_israel_abi.py",
+      "scope": "spherical nonstationary polar-areal Einstein mass/pressure/energy-flux source to moving normal Israel, same boundary N/f; no full Einstein matter evolution or free GHY",
+      "source_equation": "Delta_Ktau=(4*pi*r)/(f*sqrt(f+v^2))*((f+v^2)*p_r+v^2*rho-2*v*sqrt(f+v^2)*j)",
+      "physical_paid": false,
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "5fd775dc25104bd79f0a670198e08c8278315f76"
     }
   }
 }
