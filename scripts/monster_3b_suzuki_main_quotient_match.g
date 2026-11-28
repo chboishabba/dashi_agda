@@ -574,4 +574,28 @@ Print("qGtoN3B nonidentity kernel class: ", qKernel3,
       "; outer image class: ", qKernelOuterClass, "\n");
 Print("12ab -> main ", dec12.support, " -> descending MN3B Irr ", mn3b12Pos, "\n");
 Print("78ab -> main ", dec78.support, " -> descending MN3B Irr ", mn3b78Pos, "\n");
+# Additional source coordinate export, using the SAME selected table objects.
+# No source-word -> class map is inferred here. The class triple of each
+# actual lift must be independently identified before character comparison.
+sourceTraceRowJSON := function(row)
+  return Concatenation("[",JoinStringsWithSeparator(
+    List(row,Monster3BSourceJSONCyclotomic),","),"]");
+end;
+traceOut := OutputTextFile("build/monster_3b_main_phase_trace_source.json",false);
+SetPrintFormattingStatus(traceOut,false);
+PrintTo(traceOut,
+  "{\n",
+  "  \"main_table\": ",Monster3BSourceJSONQuotedLabel(Identifier(main)),",\n",
+  "  \"mn3b_table\": ",Monster3BSourceJSONQuotedLabel(Identifier(mn3b)),",\n",
+  "  \"base_1458_main_position\": ",base1458Pos,",\n",
+  "  \"gap_runtime_version\": ",Monster3BSourceJSONQuotedLabel(GAPInfo.Version),",\n",
+  "  \"ctbllib_runtime_version\": ",Monster3BSourceJSONQuotedLabel(GAPInfo.PackagesLoaded.ctbllib[2]),",\n",
+  "  \"main_class_orders\": ",SixSuzJSONIntArray(mainOrders),",\n",
+  "  \"main_class_sizes\": ",SixSuzJSONIntArray(mainSizes),",\n",
+  "  \"main_to_outer\": ",SixSuzJSONIntArray(mainToOuter),",\n",
+  "  \"main_to_mn3b\": ",SixSuzJSONIntArray(mainToMN3B),",\n",
+  "  \"six_to_outer\": ",SixSuzJSONIntArray(sixToOuter),",\n",
+  "  \"base1458\": ",sourceTraceRowJSON(ValuesOfClassFunction(base1458)),",\n",
+  "  \"restricted_V2\": ",sourceTraceRowJSON(List(mainToMN3B,k -> restrictedMonster[k]+1)), "\n}\n");
+CloseStream(traceOut);
 QUIT;
