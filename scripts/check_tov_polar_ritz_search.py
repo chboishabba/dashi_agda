@@ -69,7 +69,7 @@ def run(n,ell,degree=1,annulus=(.15,.85)):
         K2=(aaa*ds*ds+aa*dds)*I+(bbb*ds*ds+bb*dds)*YY+2*bb*ds*YY1+2*b*Z@T(Z)
         T1=tr(K1@B0+K0@B1); T2=tr(K2@B0+2*K1@B1+K0@B2)
         V1=(Vp*ds)[...,0,0]; V2=(Vpp*ds*ds+Vp*dds)[...,0,0]
-        S=2*np.pi*((T1+V1)*H*aw).sum(axis=1)
+        S=((T1+V1)*H*aw).sum(axis=1)
         rhs=np.zeros(n+1)
         for i in range(2):
             np.add.at(rhs,np.arange(n)+i,(wq*w*N*S*np.tile(shape[i],n)).reshape(n,-1).sum(axis=1))
