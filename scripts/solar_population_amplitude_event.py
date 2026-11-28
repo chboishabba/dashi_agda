@@ -4,7 +4,7 @@ Higher-order right support is supplied by the reaction path, not inferred
 from a zero first jet. Finite-velocity paths only.
 """
 import numpy as np
-from solar_physical_causal import event,MASS,CHARGE
+from solar_population_event import event,MASS,CHARGE
 
 
 def right_reaction_support(pop_support,pool_support,power,power_u,q):
