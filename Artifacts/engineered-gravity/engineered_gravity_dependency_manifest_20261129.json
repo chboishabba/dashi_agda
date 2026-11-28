@@ -507,5 +507,33 @@
       "scope": "Restricted EXACT frozen undeformed Y=r, f=f0,N=N0 slice with nonzero reverse-solved Y_t and bounded Y_tt, N_t, f_t: nonlinear material Euler residual persists at wall. O(v^2) corrected initial spatial and metric geometry explicitly untested.",
       "source_equation": "ELwall=-225*lambda*(lambda+2)*Sdot^2/[8pi(2lambda^2+4lambda-15)^2] !=0; bounded acceleration coefficient d(1)=0"
     }
+  },
+  "w3_original_action_boundary": {
+    "surface_gradient_repair": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_engineered_gravity_tov_material.py",
+      "checker": "scripts/check_tov_euler_moving_gradient_repair.py",
+      "source_git_blob_sha1": "a21cd32b78ce849fdbc5a2a9a70bad40e89e15ec",
+      "checker_git_blob_sha1": "c9d167e6b5ff8a5287d82365070cbc80292f8661",
+      "physical_paid": false,
+      "scope": "Exact nonlinear Euler degenerate surface trace gives f Yr²-Yt²/N²=f0_wall, and moving level set fixes Yr. No global bulk Euler/Einstein or GHY.",
+      "source_equation": "Yr_wall²=f0_wall/(f_wall-Rt_coordinate²/N_wall²)"
+    },
+    "quadratic_mass_constraint": {
+      "lanes": [
+        "D_active_stress_TOV",
+        "G_warp_junction"
+      ],
+      "source_owner": "scripts/check_tov_original_material_flux_weld.py",
+      "checker": "scripts/check_tov_quadratic_constraint_ritz.py",
+      "source_git_blob_sha1": "671a81ab6afac23e30dacc5e8b739e0ec5d066af",
+      "checker_git_blob_sha1": "ff263d3e89ed9754428c6fa2d3aa68a138262af5",
+      "physical_paid": false,
+      "scope": "Original-action radial density O(v²) plus Einstein mass constraint and corrected Euler wall trace; finite-volume 256/512/1024 candidate, not angular Einstein/fully coupled evolution.",
+      "source_equation": "M2'+8pi*r*d0*M2=4pi*r²(k*A+d0*U²/N0²), k=(M2_wall+U_wall²/(2*N_wall²))/f0_wall"
+    }
   }
 }
