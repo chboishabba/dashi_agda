@@ -6,7 +6,10 @@ from check_pnp_affine_normal_components import canon,chart,lift,Budget,Exhausted
 from check_pnp_normal_boundary_join import tree,intersection,value,rows,span
 
 
-def count(n,H,F,O,cap,clip=None,max_width=16):
+def count(n,H,F,O,cap,clip=None,max_width=16,marks=None):
+    if marks is not None:
+        from check_pnp_normal_marked_mass import marked_count
+        return marked_count(n,H,F,O,marks,cap,clip,max_width)
     # F: forbidden affine flats; O: exact-one bits (normal, offset).
     if n<0 or cap<0 or clip not in (None,2) or max_width<0 or any(not 0<=a<1<<n or b not in (0,1) for G in (H,)+F+O for a,b in G):raise ValueError('source')
     B=Budget(cap);width=0
