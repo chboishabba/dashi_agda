@@ -56,8 +56,6 @@ def dyadic_block_certificate(H,dt,receipt,occupied,field_size,bits=192,max_power
     for k in range(max_power+1):
         G=A.T@A;g=max(sum(abs(v) for v in row) for row in G)
         bound=F(sqrt_ceil(int(g))+e,Q)
-        # Current squared norm <=1-cm per step; use conservative norm <=1-cm/2,
-        # then Bernoulli on inverse to strengthen at large block lengths.
         m=1<<k; cb=1/(1+m*cm/2)
         rho=max(bound,cb) if obs['occupied_size']>n else bound
         if k%8==0 or rho<1 or k==max_power:
@@ -67,7 +65,7 @@ def dyadic_block_certificate(H,dt,receipt,occupied,field_size,bits=192,max_power
                       step_error_threshold_exact=str((1-rho)/m));break
         if k<max_power:
             A=(A@A)//Q
-            e=2*e+ceil_div(e*e,Q)+n # entry rounding Frobenius <= n/Q
+            e=2*e+ceil_div(e*e,Q)+n
     return dict(status='EXACT_DYADIC_BLOCK' if best else 'NO_DYADIC_MARGIN_WITHIN_CAP',bits=bits,
                 certificate=best,history=history,modular_rank=obs['rank'],physical_admission=False)
 
