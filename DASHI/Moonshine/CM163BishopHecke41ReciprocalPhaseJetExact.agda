@@ -3,7 +3,10 @@ module DASHI.Moonshine.CM163BishopHecke41ReciprocalPhaseJetExact where
 -- R3/R4, SOURCE-WRITTEN / KERNEL PENDING.
 -- One original logarithmic jet at the selected center, applied on
 -- the three actual modular rays, not three independent coefficients.
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
+import Data.Nat.Properties as NP
+import Sequence as Seq
+import DASHI.Moonshine.AbelBishopKoenigsComponentwiseCompletionExact as Completion
 open import Data.Fin.Base as Fin using (Fin; toℕ)
 open import Data.Nat.Properties using (_≟_)
 open import Relation.Nullary using (yes; no)
@@ -66,8 +69,43 @@ chartCV i with toℕ i ≟ 41
 ... | yes _ = Conv.scaleConv (Const.constantConverges Chart.fortyOne) Ray.tauCV
 ... | no _ = finiteCV (toℕ i)
 
+-- Use a common tail of the actual ray.  The initial large
+-- increments do not satisfy the local exponential unit-disk bound.
+drop : ∀ {X : Set} → Nat → (Nat → X) → Nat → X
+drop k f n = f (n + k)
+
+dropRealCV : ∀ k {f : Nat → R.ℝ} {a} →
+  Seq._ConvergesTo_ f a → Seq._ConvergesTo_ (drop k f) a
+dropRealCV k cv =
+  Seq.xₙ⊆yₙ∧yₙ→y
+    (Seq.subseq* ((λ n → n + k) , (λ n → P.≃-refl) ,
+      (λ n → NP.n<1+n (n + k)))) (_ , cv)
+
+dropCV : ∀ k {f : Nat → BishopComplex} {a} →
+  Lim.Conv f a → Lim.Conv (drop k f) a
+dropCV k cv = Completion.original-bishop-pointwise-complex-converges
+  (dropRealCV k (Completion.realConverges cv))
+  (dropRealCV k (Completion.imaginaryConverges cv))
+
+dropJet : ∀ k {w f a b} → J.Jet w f a b →
+  J.Jet (drop k w) (drop k f) a b
+dropJet k j = record
+  { J.quotient = drop k (J.quotient j)
+  ; J.factor = λ n → J.factor j (n + k)
+  ; J.limit = dropCV k (J.limit j) }
+
+drop2 : ∀ k {w f a b c} → J2.Jet2 w f a b c →
+  J2.Jet2 (drop k w) (drop k f) a b c
+drop2 k j = record
+  { J2.first = dropJet k (J2.first j)
+  ; J2.second = dropJet k (J2.second j) }
+
 -- All rotations use the same base exponent and coefficients.
-module At (inputs : Round11.BishopCutset) where
+module At (inputs : Round11.BishopCutset) (start : Nat) where
+  W = drop start Ray.w
+  point = drop start Ray.ray
+  wCV = dropCV start Ray.wCV
+
   module H = Log.At inputs
   module Ph = H.Phase.Ph
   module Base = H.Around Fixed.p
@@ -107,8 +145,8 @@ module At (inputs : Round11.BishopCutset) where
   Inside p v = let module Local = H.Around p in ∀ n → Local.D.Ref.S.Inside (H.F.O.q (v n))
 
   phaseJet : ∀ (v : Nat → U.BishopUpperHalfPlanePoint) k →
-    J2.Jet2 Ray.w (λ n → U.tau (v n)) Geo.tau (k *C Ray.d) ((k *C k) *C Ray.d) →
-    J2.Jet2 Ray.w (λ n → Ph.exponent (v n)) (Ph.exponent Fixed.p)
+    J2.Jet2 W (λ n → U.tau (v n)) Geo.tau (k *C Ray.d) ((k *C k) *C Ray.d) →
+    J2.Jet2 W (λ n → Ph.exponent (v n)) (Ph.exponent Fixed.p)
       (k *C ell) ((k *C k) *C ell)
   phaseJet v k j = J2.cong2 (λ n → complexSym (exponentRead (v n)))
     (complexSym (exponentRead Fixed.p))
@@ -137,50 +175,50 @@ module At (inputs : Round11.BishopCutset) where
       (complexSym (L.complexMultiplyDistributesLeft (k *C k) a0 (ell *C (ell *C Base.eulerTaylor2))))
 
   along : ∀ (v : Nat → U.BishopUpperHalfPlanePoint) k →
-    J2.Jet2 Ray.w (λ n → U.tau (v n)) Geo.tau (k *C Ray.d) ((k *C k) *C Ray.d) →
+    J2.Jet2 W (λ n → U.tau (v n)) Geo.tau (k *C Ray.d) ((k *C k) *C Ray.d) →
     Small Fixed.p v → Inside Fixed.p v →
-    J2.Jet2 Ray.w (λ n → G.j (v n)) (G.j Fixed.p)
+    J2.Jet2 W (λ n → G.j (v n)) (G.j Fixed.p)
       (k *C a0) ((k *C k) *C b0)
   along v k tau small inside =
     let e = phaseJet v k tau
         cv = Lim.limitTransport (J.sameSub (Ph.exponent Fixed.p))
-          (Lim.subConv (J.continuous Ray.wCV (J2.first e))
+          (Lim.subConv (J.continuous wCV (J2.first e))
             (Lim.constantC (Ph.exponent Fixed.p)))
         outer = Base.actualLogJet v (λ n → inc Fixed.p (v n))
           (λ n → J.recover (Ph.exponent (v n)) (Ph.exponent Fixed.p)) small cv inside
     in J2.cong2 (λ _ → C.≈C-refl _) (C.≈C-refl _) (firstRotate k) (secondRotate k)
-      (J2.compose Ray.wCV e outer)
+      (J2.compose wCV e outer)
 
-  centerTau : J2.Jet2 Ray.w (λ n → U.tau (Ray.ray n)) Geo.tau
+  centerTau : J2.Jet2 W (λ n → U.tau (point n)) Geo.tau
     (A.oneC *C Ray.d) ((A.oneC *C A.oneC) *C Ray.d)
   centerTau = J2.cong2 (λ _ → C.≈C-refl _) (C.≈C-refl _)
     (complexSym (L.complexMultiplyLeftIdentity Ray.d))
     (complexSym (complexTrans (A.mulCCongruent (L.complexMultiplyLeftIdentity A.oneC) (C.≈C-refl _))
-      (L.complexMultiplyLeftIdentity Ray.d))) Ray.tauJet
+      (L.complexMultiplyLeftIdentity Ray.d))) (drop2 start Ray.tauJet)
 
-  central : Small Fixed.p Ray.ray → Inside Fixed.p Ray.ray →
-    J2.Jet2 Ray.w (λ n → G.j (Ray.ray n)) (G.j Fixed.p) a0 b0
+  central : Small Fixed.p point → Inside Fixed.p point →
+    J2.Jet2 W (λ n → G.j (point n)) (G.j Fixed.p) a0 b0
   central sm ins = J2.cong2 (λ _ → C.≈C-refl _) (C.≈C-refl _)
     (L.complexMultiplyLeftIdentity a0)
     (complexTrans (A.mulCCongruent (L.complexMultiplyLeftIdentity A.oneC) (C.≈C-refl _))
       (L.complexMultiplyLeftIdentity b0))
-    (along Ray.ray A.oneC centerTau sm ins)
+    (along point A.oneC centerTau sm ins)
 
-  plus : Small Fixed.p (λ n → Transport.forward (Ray.ray n)) →
-    Inside Fixed.p (λ n → Transport.forward (Ray.ray n)) →
-    J2.Jet2 Ray.w (λ n → G.j (Chart.chartPoint (Fin.suc Fin.zero) (Ray.ray n)))
+  plus : Small Fixed.p (λ n → Transport.forward (point n)) →
+    Inside Fixed.p (λ n → Transport.forward (point n)) →
+    J2.Jet2 W (λ n → G.j (Chart.chartPoint (Fin.suc Fin.zero) (point n)))
       (G.j Fixed.p) (Geo.alpha *C a0) ((Geo.alpha *C Geo.alpha) *C b0)
-  plus sm ins = J2.cong2 (λ n → T.forwardJ (Ray.ray n))
+  plus sm ins = J2.cong2 (λ n → T.forwardJ (point n))
     (C.≈C-refl _) (C.≈C-refl _) (C.≈C-refl _)
-    (along (λ n → Transport.forward (Ray.ray n)) Geo.alpha Transport.Plus.jet sm ins)
+    (along (λ n → Transport.forward (point n)) Geo.alpha (drop2 start Transport.Plus.jet) sm ins)
 
-  minus : Small Fixed.p (λ n → Transport.reverse (Ray.ray n)) →
-    Inside Fixed.p (λ n → Transport.reverse (Ray.ray n)) →
-    J2.Jet2 Ray.w (λ n → G.j (Chart.chartPoint Fin.zero (Ray.ray n)))
+  minus : Small Fixed.p (λ n → Transport.reverse (point n)) →
+    Inside Fixed.p (λ n → Transport.reverse (point n)) →
+    J2.Jet2 W (λ n → G.j (Chart.chartPoint Fin.zero (point n)))
       (G.j Fixed.p) (Geo.beta *C a0) ((Geo.beta *C Geo.beta) *C b0)
-  minus sm ins = J2.cong2 (λ n → T.reverseJ (Ray.ray n))
+  minus sm ins = J2.cong2 (λ n → T.reverseJ (point n))
     (C.≈C-refl _) (C.≈C-refl _) (C.≈C-refl _)
-    (along (λ n → Transport.reverse (Ray.ray n)) Geo.beta Transport.Minus.jet sm ins)
+    (along (λ n → Transport.reverse (point n)) Geo.beta (drop2 start Transport.Minus.jet) sm ins)
 
   -- R4: original chart continuity from the existing actual local jet,
   -- once the literal domain witnesses are constructed.
@@ -195,10 +233,10 @@ module At (inputs : Round11.BishopCutset) where
       (λ n → J.recover (Ph.exponent (v n)) (Ph.exponent p)) sm hcv ins))
 
   chartJCV : (∀ i → Small (Chart.chartPoint i Fixed.p)
-    (λ n → Chart.chartPoint i (Ray.ray n))) →
+    (λ n → Chart.chartPoint i (point n))) →
     (∀ i → Inside (Chart.chartPoint i Fixed.p)
-    (λ n → Chart.chartPoint i (Ray.ray n))) →
-    ∀ i → Lim.Conv (λ n → G.j (Chart.chartPoint i (Ray.ray n)))
+    (λ n → Chart.chartPoint i (point n))) →
+    ∀ i → Lim.Conv (λ n → G.j (Chart.chartPoint i (point n)))
       (G.j (Chart.chartPoint i Fixed.p))
   chartJCV sm ins i = jContinuous (Chart.chartPoint i Fixed.p)
-    (λ n → Chart.chartPoint i (Ray.ray n)) (chartCV i) (sm i) (ins i)
+    (λ n → Chart.chartPoint i (point n)) (dropCV start (chartCV i)) (sm i) (ins i)
