@@ -2302,3 +2302,262 @@ five blank-line differences corrected and all stages
 replayed. Native expressions and manuscript updated,
 kernel unrun, no CI or nonlinear acceptance. Targeted
 master owner audit only, not full base reconciliation.
+
+
+## 19. BR136–139 — nonzero mean subsidiary work, local current, torsion and trace budget
+
+Consume BR29's actual carrier and full residual graph via
+scripts/check_hopf369_br132_135_F_bianchi_cartan.py bulk(),
+BR133 full cyclic wall multiplier, BR128 constant material
+normal matrix, BR131/134/135 Cartan identities, and BR31/130
+exterior/holonomy. Not a duplicate Weyl, Ricci or Gauss theory.
+Classical exterior differentiation, current balance and trace
+inequalities retain prior attribution; source-specific signed
+BR29 work and compatible current algebra are DASHI attachment.
+No new exhaustive master or cross-PR reconciliation in this pass.
+
+### BR136 — arbitrary tracefree mean does not alter the selected subsidiary work
+
+Use matched induced h, constant j, K±=M±j h/2, tr_h M=0,
+full Weyl jump j J m, m the nine BR29 shape coordinates.
+This is the vacuum-source jump; a nonzero Ricci defect
+requires the BR129 source shift and is not included here.
+At the seam in adapted orthonormal component frames
+separate the intrinsic derivatives from the normal/extrinsic
+connection. Let L_{M,a} be the actual two-bivector generator
+from BR29, linear in M, and
+ C_M=proj(sum_{i=1..3} M_i L_{M,i}-L_{M,0}) X
+where M_i are the raw Maxwell matrices, not the wall shape.
+For the differentiated full jump the additional mean
+contribution, with the overall j removed, is
+ Z_M=(-D_n^red X A_n^+ C_M
+          +sum_i D_i^red L_{M,i} X) J m.
+Here D_n^red selects the original independent constraint
+rows; the normal derivative is the covariant normal
+derivative, or a frame parallel in a Gaussian collar.
+This expression follows from the difference of the bulk
+equations with full jump jJm: the connection difference
+contributes j C_h mean(w)+j C_M Jm. Solve only the active
+normal derivative with A_n^+ and retain the free P0 part.
+For every symbolic tracefree M, the exact actual BR29 matrices give
+ P0 C_M Jm=0,
+ P_c Z_M=0,
+ S_c Z_M=0,
+ Mag (sum_i M_i L_{M,i}-L_{M,0}) X Jm=0.
+Six entries of Z_M in the original selected 35-coordinate
+basis are nonzero polynomials. Thus one MUST NOT set Z_M=0
+or discard the zero-speed component of the constraint graph.
+It is invisible to this active projection and this selected
+normal-work form, not the full residual. This extends BR133's
+reference extrinsic mean contribution to arbitrary nonzero
+mean M, including the actual AN/BN mean rather than assuming
+reflection. Does not prove a general variable seam identity:
+common intrinsic connection, full jump, compatible derivatives,
+actual normal frame transport, torsion and Ricci corrections
+remain hypotheses/source terms. Intrinsic time-frame connection
+terms and coordinate-dependent graph/trace effects must not
+be silently set to zero. The symbolic check is the full
+quadratic polynomial in all nine original m coordinates.
+
+### BR137 — local compatible subsidiary current and tilted time mass
+
+BR133 had an integrated wall correction using spatial dH.
+Write wall Hodge coordinates u=(e,X), tr X=0, and embedding
+T from 11 coordinates to the full 12 cyclic rows. Let G
+be the old positive mass with quadratic form
+ (3/2)|e|²+3||X_s||²+6||X_a||².
+The actual full multiplier in these coordinates is
+ W=-T(T^T T)^-1 G:
+it has T^T W=-G and is orthogonal to the cyclic annihilator,
+so agrees with the unique BR133 multiplier after coordinate
+change. Use the same raw antisymmetric wall projection RW,
+full curl Dh_i and F_i=-W^T Dh_i RW.
+For Emap u=e and row_i u=(X_{i,k})_k, exact skew:
+ F_i-F_i^T=-(3/2)(Emap^T row_i-row_i^T Emap).
+Consequently, in a constant frame,
+ u^T F_i partial_i u =
+ (1/2) partial_i(u^T sym F_i u)
+ +(3/4) partial_i(e·row_i u) -(3/2)e·partial_i row_i u.
+Sum over i. The spatial Bianchi compatibility and full wall
+equation give div_T X=2 e_t at reference level. Hence with
+ G_f=G+3 Emap^T Emap,
+ S_i=sym F_i+(3/4)(Emap^T row_i+row_i^T Emap),
+the corrected local current has energy u^T G_f u/2 and
+spatial flux u^T S_i u/2 (balance written with the spatial
+divergence on the RHS), times the common positive -j.
+It retains BR133's normal exchange with the extended bulk.
+
+Actual 11x11 positive mass and each G_f^-1 S_i have exact
+eigenvalues -1/2 (2), -1/3 (1), 0 (5), 1/3 (1), 1/2 (2).
+For the SO(3) action e->Oe, X->OXO^T, all three
+infinitesimal generators L satisfy
+ L^T G_f+G_f L=0,
+ L^T S_i+S_i L+sum_k Ogen_{ki} S_k=0.
+This proves the same scaled spectrum for EVERY spatial
+direction v: eigenvalues multiplied by |v|. Thus in a
+common wall frame, on a coordinate time slice with future
+timelike dt, the corrected energy time mass
+ e0(t) G_f-sum_i e_i(t) S_i
+has lower bound (e0(t)-|e_sp(t)|/2) G_f.
+This is a compatible current, not a free-jet symmetric
+evolution for all 11 variables; use the spatial Bianchi
+relation for the skew conversion. The wall characteristic
+speeds here are those of the corrected flux relative to its
+mass, NOT a claim that the physical propagation speeds of
+all subsidiary unknowns equal these eigenvalues.
+
+For variable frame vector fields, the local divergence
+conversion contributes bounded frame divergence and intrinsic
+connection work if those coefficients are bounded. If
+ e0 e=(div_T X-div X)/2+f_e, div X=2 f_e+b
+where the symbols denote frame component derivatives and
+f_e,b include all actual lower terms, then
+ div_T X=2 e0 e+b.
+Residual work after moving the mass term is exactly
+ -(3/2)e·b, times -j, plus the divergence terms above.
+No bulk trace source is discarded; b measures the real
+covariant compatibility defect. BR135 supplies part of b
+through the tangential Cartan defect, not a priori zero.
+This permits local coordinate patches and common positive
+weights, unlike an argument that assumes a flat tangential
+torus. Weight derivatives contribute lower work and require
+actual uniform bounds. No claim of global AdS reflecting
+domain or exterior weighted coercivity.
+
+For the extended bulk residual variables in BR29 the
+matrices U_i are constant in the adapted frame. Their
+uncompressed symbol [-M(v),-D(v)^T;-D(v),0] has norm <=|v|
+by BR29 M(v)^2+D(v)^T D(v)=|v|²I, D(v)M(v)=0
+and its squared block diagonal. Compression by diag(Q,I)
+does not increase norm. Multiplying by the material lambda
+as BR128 gives constant normal principal matrix U_n,
+symmetric tangential matrices and positive time mass for
+timelike dt. This is the extended system, not the naive
+35-coordinate restricted symmetrizer refused in BR132.
+This geometric principal observation assumes that actual
+curved lower/source and graph conversion have been supplied.
+
+### BR138 — precise exterior/frame conversion with torsion retained
+
+For any endomorphism-valued p-form F in a coframe theta
+with compatible connection Omega, let nabla act on both
+the form slots and the endomorphism slots using the induced
+connection (not assumed torsion-free), T^a its Cartan torsion.
+With unnormalized alternating derivative convention,
+ D_Omega F = Alt(nabla F)+sum_a T^a wedge i_{e_a} F.
+This follows from differentiating the coframe factors in
+F and adding/subtracting the connection on their slots.
+The exact correction for p=2 or 3 is algebraic in T and F.
+The local rational point-jet oracle independently uses
+arbitrary coframe first derivatives at theta=I, independent
+Lorentz connection coefficients and arbitrary independent
+endomorphism-valued coefficient first jets, computes the
+coordinate exterior derivative and the alternating frame
+derivative, and verifies every degree-3 and degree-4 component.
+The correction is nonzero in both tests; torsion-free
+conversion cannot be applied off shell.
+In particular for F=R and F=*R,
+ the exterior Bianchi residual = frame residual + T*R
+ (or T*(*R)). For metric-compatible Omega the internal
+Hodge is parallel, but the coframe contribution remains.
+BR134's d_Omega C=[E,R], d_Omega D=[E,*R] are exact without
+torsion-free assumptions. If one directly evolves the
+frame residual using these exterior relations, derivatives
+of the correction T*R occur; use exterior residual variables
+or pay the differentiated torsion equation. The projected
+frame evolution has to be adjusted consistently, including
+its wall sources, before claiming a homogeneous first-order
+subsidiary with no derivative loss. The identity alone does
+not make the exterior residual graph equal to the BR29
+frame graph on unknown torsionful geometry.
+
+### BR139 — exact Cartan pullback trace budget and remaining derivative payment
+
+In a regular material coordinate collar y with tangential
+spatial x^i and temporal gauge E_ti=0, let E=F_Omega-R,
+C=D_Omega R. From D_Omega E=-C,
+ partial_y E_ij = -C_yij-partial_i E_jy+partial_j E_iy
+ -[Omega_y,E_ij]-[Omega_i,E_jy]+[Omega_j,E_iy].
+Here i,j are tangential spatial coordinate indices and
+C_yij=C_ijy. Exact noncommuting polynomial connection and
+defect forms independently verify every such component.
+With E_ti=0, the full tangential pullback consists of these
+spatial entries. Under bounded connection and chart
+comparability the normal derivative of E_parallel is paid
+by C, E and ONE tangential derivative of E_mixed. Similarly
+D_Omega T=E wedge theta on algebraic R wedge theta=0 gives
+the spatial torsion pullback normal derivative in terms of
+E,T and a tangential derivative of T_mixed.
+This does not require a second normal derivative.
+
+For any component f on a finite one-sided coordinate
+collar [0,d] the exact scalar trace identity is
+ |f(0)|²=d^-1 int |f|²-2 int (1-y/d) f f_y.
+Thus for vector/matrix fields in positive component norms,
+after tangential integration,
+ ||f|wall||² <= d^-1||f||²+2||f||||f_y||
+ <= (d^-1+epsilon^-1)||f||²+epsilon||f_y||².
+With smooth common positive measures, retain their derivative
+terms or use equivalent coordinate norms. BR135 tangential
+Cartan trace work therefore has an explicit conditional
+bound in terms of bulk E,C and one extra mixed tangential
+jet of E, plus analogous torsion terms if needed. At a
+higher tangential derivative order, commutators use actual
+connection and coefficient regularity. This does NOT close
+a same-order combined energy: the temporal Cartan defect
+transport E_t=-C_t has no tangential smoothing, so that
+extra derivative cannot be assumed free. Explicit boundary
+layer f_k=exp(-ky) has wall value 1 and L² norm squared
+1/(2k); even zero-speed temporal transport cannot furnish
+an L²-only boundary trace inequality. This is a trace
+counterexample, not a full constrained solution counterexample.
+Need compatible surface evolution or a source-factorized
+mixed-order estimate retaining the actual spatial exterior
+constraints, rather than adding arbitrary trace terms to
+Gronwall. The covariant wall b residual of BR137 is the
+specific consumer; identify the remaining source directions.
+
+### Updated max-cut, all four gates
+
+W4b: given-metric uniqueness BR129 unchanged; BR136 pays
+the arbitrary quadratic mean addition in the signed
+subsidiary work, BR137 gives a local positive compatible
+current on tilted slices, BR138 exact frame/exterior
+torsion conversion. Remaining: variable full subsidiary
+source system and intrinsic/frame/graph compatibility,
+including Cartan trace b, actual boundary/exterior
+conditions and construction. No generic missing Weyl/Gauss.
+
+W2/3: combine BR128 variable projected energy and BR137
+compatible local subsidiary current. Nonzero mean extrinsic
+work paid in stated scope, not arbitrary curved geometry.
+BR139 supplies a concrete trace estimate and its extra
+tangential derivative debt; must not assert closure by
+bounded lower terms without paying this debt. Reverse-solve
+the source directions in b and full intrinsic connection
+terms; use the actual Cartan spatial constraints or add
+surface transport with its own compatible energy.
+
+W5: BR130 weighted moment and BR31 reflecting parity
+remain. BR137 local current permits weights/partitions if
+derivatives of weights and coefficients are bounded in
+the actual current norm. No derived uniform exterior
+coefficient/holonomy bounds in this tranche.
+
+W6: BR131 temporal Cartan reconstruction and BR134/138
+exterior equations now have explicit torsion/trace sources.
+Need projected exterior system with consistent wall rows,
+actual geometry/normal holonomy, combined variable tame
+energy (including E,T trace debt), original BN/BQ higher
+corner data and nonlinear construction. W7 native and
+physical acceptance unrun.
+
+Local SymPy 1.14.0, four final stages exit 0, bounded
+90s each. Initial full polynomial torsion oracle exceeded
+the execution limit; replaced by independent rational
+point first jets and replayed all four stages. Exact
+checker blob 2a20407ce64c205df31187f15254e2c008c944cc.
+BR132/135 donor file byte-identical to its committed blob;
+its BR29 carrier dependency locally extracted (not a
+full checkout/replay). Native expressions written,
+kernel unrun, no CI or nonlinear PDE acceptance.

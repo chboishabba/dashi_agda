@@ -3930,3 +3930,37 @@ module At {r : Level} (F : C.RealField r)
   -- spatial differential compatibility. No free extra wall mode.
   -- BR134/135 are exterior identities; torsion/frame conversion,
   -- variable seam, exterior and nonlinear generation remain open.
+
+
+  ------------------------------------------------------------------------
+  -- BR136–139: compatible subsidiary current and explicit trace debt.
+  -- Scalar contractions are supplied in the actual common Hodge frame.
+  ------------------------------------------------------------------------
+  originalFSubsidiaryFluxCorrection : S → S → S
+  originalFSubsidiaryFluxCorrection symmetricFlux electricRowPair =
+    symmetricFlux + (three * quarter) * electricRowPair
+
+  originalFSubsidiarySkewDefectWork : S → S
+  originalFSubsidiarySkewDefectWork electricDefectPair =
+    neg ((three * half) * electricDefectPair)
+
+  originalFSubsidiaryCompatibleTimeMargin : S → S → S
+  originalFSubsidiaryCompatibleTimeMargin temporalComponent spatialMagnitude =
+    temporalComponent - half * spatialMagnitude
+
+  originalFExteriorFrameTorsionCorrection : S → S → S
+  originalFExteriorFrameTorsionCorrection alternatingDerivative torsionInsertion =
+    alternatingDerivative + torsionInsertion
+
+  originalFCartanPullbackNormalDerivative : S → S → S → S → S
+  originalFCartanPullbackNormalDerivative bianchi mixedIJ mixedJI connectionWork =
+    neg bianchi - mixedIJ + mixedJI - connectionWork
+
+  originalFCartanTraceBudget : S → S → S → S
+  originalFCartanTraceBudget inverseLength bulkSquare normalPair =
+    inverseLength * bulkSquare + two * normalPair
+
+  -- BR136 quadratic mean residual is not zero: only the actual
+  -- active/normal work and magnetic projections vanish.
+  -- BR137 corrected flux is a compatible current, not a free-jet
+  -- evolution symmetrizer. BR139 needs a mixed tangential jet.
