@@ -1,0 +1,12 @@
+{
+  "status":"PASS_WITH_API_COMPATIBLE_TEST_DOUBLES",
+  "donor_modules_executed":false,
+  "runs":[
+    {"n":36,"direct_sum_rank":36,"direct_sum_dimension":36,"affine_restrictions":216,"nonlinear_residuals_retained":36,"boolean_diagonal_linear_correction_bits":272,"affine_escape_witnesses":18,"full_original_source_witnesses":18,"affine_only_witnesses_not_promoted":0,"exact_restriction_checks":1296},
+    {"n":48,"direct_sum_rank":48,"direct_sum_dimension":48,"affine_restrictions":393,"nonlinear_residuals_retained":48,"boolean_diagonal_linear_correction_bits":442,"affine_escape_witnesses":24,"full_original_source_witnesses":24,"affine_only_witnesses_not_promoted":0,"exact_restriction_checks":2304},
+    {"n":72,"direct_sum_rank":72,"direct_sum_dimension":72,"affine_restrictions":904,"nonlinear_residuals_retained":72,"boolean_diagonal_linear_correction_bits":992,"affine_escape_witnesses":36,"full_original_source_witnesses":36,"affine_only_witnesses_not_promoted":0,"exact_restriction_checks":5184},
+    {"n":96,"direct_sum_rank":96,"direct_sum_dimension":96,"affine_restrictions":1645,"nonlinear_residuals_retained":96,"boolean_diagonal_linear_correction_bits":1746,"affine_escape_witnesses":48,"full_original_source_witnesses":48,"affine_only_witnesses_not_promoted":0,"exact_restriction_checks":9216}
+  ],
+  "overlap_triangle":{"status":"OVERLAP_LATTICE_REQUIRED","summand_rank":3,"summand_dimension":6,"pair_intersection_dimensions":[3,3,3],"rado_chosen":3,"rado_core":0},
+  "scope":"local algebra/control-flow test using API-compatible stubs; not an acceptance run of the actual PR #1549 donor modules"
+}
