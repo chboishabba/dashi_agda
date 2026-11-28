@@ -14,14 +14,22 @@ import DASHI.Core.GovernedIndexedResidualCubeExact as Cube
 import DASHI.Cognition.PNF.X369InputIndexedFutureConsumerExact as Future
 
 module IndexedSource
-  (History Time Depth Frobenius Version Residual : Set)
-  (index : Set)
-  -- An actual index chart and provenance map is a SOURCE obligation.
-  (historyAt : index → History)
-  (timeAt : index → Time)
-  (depthAt : index → Depth)
-  (frobeniusAt : index → Frobenius)
-  (versionAt : index → Version) where
+  (History Time Depth Frobenius Version Residual : Set) where
+
+  -- Reuse the exact canonical cube index, not an invented index product.
+  Index : Set
+  Index = Cube.Index History Time Depth Frobenius Version
+
+  historyAt : Index → History
+  historyAt = Cube.Index.history
+  timeAt : Index → Time
+  timeAt = Cube.Index.time
+  depthAt : Index → Depth
+  depthAt = Cube.Index.depth
+  frobeniusAt : Index → Frobenius
+  frobeniusAt = Cube.Index.iteration
+  versionAt : Index → Version
+  versionAt = Cube.Index.version
 
   Full : Set
   Full = Fabric.TernaryHyperformalPoint
@@ -29,7 +37,7 @@ module IndexedSource
   -- The original machine may have arbitrary recurrent states. The
   -- residual is not assumed finite nor is its byte identity erased.
   State : Set
-  State = (Full × Residual) × index
+  State = (Full × Residual) × Index
 
   chart : State → Full
   chart ((x , r) , k) = x
@@ -37,17 +45,17 @@ module IndexedSource
   residual : State → Residual
   residual ((x , r) , k) = r
 
-  sourceIndex : State → index
+  sourceIndex : State → Index
   sourceIndex ((x , r) , k) = k
 
-  reopen : Full → Residual → index → State
+  reopen : Full → Residual → Index → State
   reopen x r k = (x , r) , k
 
   reopenBidi : (s : State) →
     reopen (chart s) (residual s) (sourceIndex s) ≡ s
   reopenBidi ((x , r) , k) = refl
 
-  splitBidi : (x : Full) (r : Residual) (k : index) →
+  splitBidi : (x : Full) (r : Residual) (k : Index) →
     chart (reopen x r k) ≡ x
   splitBidi x r k = refl
 
@@ -107,8 +115,8 @@ module IndexedSource
   -- removed merely by showing a chart on the nine-trit spatial carrier.
   module IndexNecessity
     {Output : Set}
-    (readIndex : index → Output)
-    (k0 k1 : index)
+    (readIndex : Index → Output)
+    (k0 k1 : Index)
     (distinct : readIndex k0 ≡ readIndex k1 → ⊥)
     (x : Full)
     (r : Residual) where
@@ -134,3 +142,27 @@ module IndexedSource
 -- are required before a quotient can be asserted. Indexed six-face data
 -- come from GovernedIndexedResidualCubeExact; they do not follow from
 -- this BIDI alone.
+
+  module ResidualNecessity
+    {Output : Set}
+    (readResidual : Residual → Output)
+    (r0 r1 : Residual)
+    (distinct : readResidual r0 ≡ readResidual r1 → ⊥)
+    (x : Full)
+    (k : Index) where
+
+    sameSpatialChart :
+      chart (reopen x r0 k) ≡ chart (reopen x r1 k)
+    sameSpatialChart = refl
+
+    noSpatialOnlyResidualReader :
+      (read : Full → Output) →
+      ((s : State) → read (chart s) ≡ readResidual (residual s)) → ⊥
+    noSpatialOnlyResidualReader read exact =
+      distinct (trans (sym (exact (reopen x r0 k)))
+        (exact (reopen x r1 k)))
+      where
+        sym : ∀ {A : Set} {a b : A} → a ≡ b → b ≡ a
+        sym refl = refl
+        trans : ∀ {A : Set} {a b c : A} → a ≡ b → b ≡ c → a ≡ c
+        trans refl p = p
