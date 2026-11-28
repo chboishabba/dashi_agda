@@ -1970,3 +1970,96 @@ module At {r : Level} (F : C.RealField r)
   -- divided coefficient. The ORIGINAL physical BR47 row, normal
   -- value continuity, BR19 material good unknown, and original
   -- BR29 Bianchi constraint are NOT replaced by this product algebra.
+
+  ------------------------------------------------------------------------
+  -- BR55: exact FIVE-AXIS source principal Bianchi symbol, sharing the
+  -- original 15-component Einstein perturbation with BR45/46.
+  --
+  -- The reference signature is eta=(-,+,+,+,+), including n. No
+  -- characteristic divisor z² is ever inverted; nonzero gauge mode
+  -- on z²=0 is explicitly allowed. The underlying 5D contracted
+  -- Bianchi / Weitzenböck curvature identity is original geometry,
+  -- not a theorem obtained from BR29's finite projected Maxwell model.
+  ------------------------------------------------------------------------
+
+  raiseCov : Cov → Cov
+  raiseCov z (wall a) = sign a * z (wall a)
+  raiseCov z normal = z normal
+
+  trace5 : Tensor → S
+  trace5 p = tr p + h44 p
+
+  waveSquare : Cov → S
+  waveSquare z = sum5 (λ a → raiseCov z a * z a)
+
+  contractedGaugeSymbol : Cov → Tensor → Cov
+  contractedGaugeSymbol z p b =
+    sum5 (λ a → raiseCov z a * get p a b)
+      - half * z b * trace5 p
+
+  linearRicciSymbol : Cov → Tensor → Tensor
+  linearRicciSymbol z p =
+    tab (λ a b →
+      half *
+        (z a * sum5 (λ k → raiseCov z k * get p k b)
+        + z b * sum5 (λ k → raiseCov z k * get p k a)
+        - waveSquare z * get p a b
+        - z a * z b * trace5 p))
+
+  reducedEinsteinRicciSymbol : Cov → Tensor → Tensor
+  reducedEinsteinRicciSymbol z p =
+    subT (linearRicciSymbol z p)
+      (mulT half (tab (λ a b →
+        z a * contractedGaugeSymbol z p b
+        + z b * contractedGaugeSymbol z p a)))
+
+  traceReverse5 : Tensor → Tensor
+  traceReverse5 p =
+    tab (λ a b →
+      get p a b - half * metric a b * trace5 p)
+
+  contractedTraceReverse5 : Cov → Tensor → Cov
+  contractedTraceReverse5 z p a =
+    sum5 (λ b → raiseCov z b * get (traceReverse5 p) b a)
+
+  originalBianchiSourceResidual : Cov → Tensor → Cov
+  originalBianchiSourceResidual z p a =
+    contractedTraceReverse5 z (reducedEinsteinRicciSymbol z p) a
+      + half * waveSquare z * contractedGaugeSymbol z p a
+
+  -- The exact mathematical target is
+  --   originalBianchiSourceResidual z p a == 0
+  -- for all z,p,a, using ring identities. It is PRESENT AS A PROOF
+  -- OBLIGATION rather than an untypechecked 'refl' or a postulate.
+  record OriginalBianchiPrincipalCertificate
+      (z : Cov) (p : Tensor) : Set r where
+    constructor originalBianchiPrincipalCertificate
+    field
+      fiveAxisContractedBianchi :
+        (a : Axis) → originalBianchiSourceResidual z p a ≡ O
+  open OriginalBianchiPrincipalCertificate public
+
+  -- Geometrically curved source requires Ric=-4g on the same AdS
+  -- background, with the exact connection-commutator identity:
+  --   div_g( symgrad C - g div C ) = (box_g C + Ric(C))/2.
+  -- The extra Ric term and moving Israel Codazzi/Gauss residuals are
+  -- not optional and are NOT recovered by the flat principal symbol.
+  record PhysicalCurvedBianchiPayment : Set r where
+    constructor physicalCurvedBianchiPayment
+    field
+      originalSourceMetric : ADMPhysicalPoint
+      originalGraph : MaterialGraphGradient
+      originalPhysicalMetricJets : Tensor
+      originalPhysicalGaugeJets : Cov
+      variableCurvaturePayment : Cov
+      variableConnectionPayment : Cov
+      nonlinearHarmonicPayment : Cov
+      wallCodazziPayment : Cov
+      wallGaussPayment : S
+      remainingProjectedBianchi : Cov
+  open PhysicalCurvedBianchiPayment public
+
+  -- BR29's rank-nine projected Weyl kernel is a DIFFERENT 35D carrier.
+  -- Its original projected-source factor is checked against original
+  -- J,A,B,R in BR53. This Cov keeps precisely the five harmonic-gauge
+  -- subsidiary sources; do not silently equate rank-five and rank-nine.
