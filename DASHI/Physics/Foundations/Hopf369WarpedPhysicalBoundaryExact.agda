@@ -1642,3 +1642,89 @@ module At {r : Level} (F : C.RealField r)
   -- residual is intentionally NONZERO. BR19 moving-material graph and
   -- normal-chart weld must consume it before BR41 wall work is asserted
   -- for the true PDE conormal. No inverse or positivity is assumed.
+
+  ------------------------------------------------------------------------
+  -- BR49: actual moving-material defining function F=n-f(t,x,y,z).
+  -- Its physical conormal is g^(-1)dF. Using ∂n alone is valid ONLY at
+  -- the compatible BR48 Gaussian collar. Retain the time/shift/graph
+  -- coupling at a general moving Einstein–Israel wall.
+  ------------------------------------------------------------------------
+
+  record MaterialGraphGradient : Set r where
+    constructor materialGraphGradient
+    field
+      graphTimeGradient : S
+      graphTangentGradient : Wall → S
+  open MaterialGraphGradient public
+
+  materialDefiningCovector : MaterialGraphGradient → Cov
+  materialDefiningCovector f normal = U
+  materialDefiningCovector f (wall a) =
+    neg (graphTangentGradient f a)
+
+  -- D g^{-1}(dF,du) for the ORIGINAL variable ADM source. Here the
+  -- four spatial axes are x,y,z,normal; the wall time covector is
+  -- carried separately by graphTimeGradient, never silently set zero.
+  materialGraphSpaceNormal : MaterialGraphGradient → BR4Space → S
+  materialGraphSpaceNormal f spaceX =
+    neg (graphTangentGradient f x)
+  materialGraphSpaceNormal f spaceY =
+    neg (graphTangentGradient f y)
+  materialGraphSpaceNormal f spaceZ =
+    neg (graphTangentGradient f z)
+  materialGraphSpaceNormal f spaceNormal = U
+
+  -- g^(-1)(dF,dF)=H^ij F_i F_j-(F_t-v^iF_i)^2/N².
+  graphAdvectiveTime : ADMPhysicalPoint → MaterialGraphGradient → S
+  graphAdvectiveTime g f =
+    neg (graphTimeGradient f)
+      - sumBR4Space (λ i →
+          fourShift g i * materialGraphSpaceNormal f i)
+
+  graphNormSquared : ADMPhysicalPoint → MaterialGraphGradient → S
+  graphNormSquared g f =
+    sumBR4Space (λ i → sumBR4Space (λ k →
+      spatialInverse g i k *
+        materialGraphSpaceNormal f i * materialGraphSpaceNormal f k))
+      - inverseLapseSquared g *
+          graphAdvectiveTime g f * graphAdvectiveTime g f
+
+  -- This raw densitized flux remains meaningful before an explicit
+  -- positive graph-normalization certificate is available:
+  --
+  -- D g^(mu nu) F_mu u_nu =
+  -- D [H^ij F_i u_j - N^-2(F_t-v.F)(u_t-v.grad u)].
+  materialGraphFlux : ADMPhysicalPoint → MaterialGraphGradient →
+    S → (BR4Space → S) → S
+  materialGraphFlux g f ut du =
+    volumeDensity g *
+      (sumBR4Space (λ i → sumBR4Space (λ k →
+        spatialInverse g i k * materialGraphSpaceNormal f i * du k))
+        - inverseLapseSquared g * graphAdvectiveTime g f *
+          (ut - sumBR4Space (λ i → fourShift g i * du i)))
+
+  -- The exact conforming collar is a SPECIAL CASE; the material
+  -- mismatch is a first-class source, not set to zero off shell.
+  record MaterialConormalMismatch : Set r where
+    constructor materialConormalMismatch
+    field
+      graphConormalWork : S
+      coordinateNormalWork : S
+      graphExtraWork : S
+      graphSquaredNorm : S
+  open MaterialConormalMismatch public
+
+  materialConormalMismatch : ADMPhysicalPoint → MaterialGraphGradient →
+    S → (BR4Space → S) → MaterialConormalMismatch
+  materialConormalMismatch g f ut du =
+    materialConormalMismatch
+      (materialGraphFlux g f ut du)
+      (volumeDensity g * du spaceNormal)
+      (materialGraphFlux g f ut du
+        - volumeDensity g * du spaceNormal)
+      (graphNormSquared g f)
+
+  -- A real geometric owner must prove graphNormSquared>0 and supply
+  -- its positive square root to normalize the wall normal. This field
+  -- cannot inhabit the unproved physical Bianchi or BR37 glancing
+  -- certificate by algebraic projection alone.
