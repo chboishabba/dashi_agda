@@ -1,9 +1,9 @@
 {
   "date": "2026-11-28",
   "source_script": "scripts/check_paper9_machin_two_atom_cayley.py",
-  "source_git_blob": "f89d58b681ecb008c4df534a76b28fc16ef7d732",
-  "local_git_blob": "f89d58b681ecb008c4df534a76b28fc16ef7d732",
-  "local_sha256": "5e54474e12c50904c98f7ecc955036de559e2c4fe7383ad2d003ccedce0df0a7",
+  "source_git_blob": "45c3ec9b4958be664583c8535d3ed8f88b2351d6",
+  "local_git_blob": "45c3ec9b4958be664583c8535d3ed8f88b2351d6",
+  "local_sha256": "f00816eb3327bbfd39ef451dd6d660e105e6c00dd4580cc1aba339bcf5581e1b",
   "byte_identical": true,
   "executed": true,
   "python_exact_rational": true,
@@ -29,7 +29,9 @@
     "cayley_first_order_ODE": true,
     "arctan_reference_derivative": true,
     "selected_CM_scale": true,
-    "log_q_second_order": true
+    "log_q_second_order": true,
+    "selected_tau_negative_imaginary_argument": true,
+    "incorrect_positive_tau_argument_rejected": true
   },
   "provenance": {
     "pair_assembly": "BishopMachinTwoPointCayleyCompositionExact.nativeCombinedCayleyFromTwoOriginalAtanValues",
@@ -37,13 +39,16 @@
     "machin_phase": "BishopMachinSelectedImaginaryPhaseWeldExact.machinImaginaryPhaseFromTwoOriginalAtans",
     "selected_bishop_q": "CM163BishopOriginalQPhaseFromCayleyExact.FromTwoOriginalAtans.originalQ",
     "original_q_radius": "JInvariantBishopCM163SelectedDiskExact.radius",
-    "original_exp_source": "BishopExponentialSeriesConvergenceExact.bishopExp"
+    "original_exp_source": "BishopExponentialSeriesConvergenceExact.bishopExp",
+    "original_selected_tau_exponent": "CM163BishopSelectedTauExponentExact.literalExponentSigned",
+    "original_selected_tau_q": "CM163BishopSelectedTauExponentExact.FromTwoOriginalAtans.actualBishopCMQ"
   },
   "unproved_producers": [
     "OriginalAtanFiveCayleyEvaluation (actual Bishop atan/exponential)",
     "OriginalAtan239CayleyEvaluation (actual Bishop atan/exponential)",
     "actual all-index Hecke product and CM j literal root",
-    "hypergeometric original Bishop factorial Euler limit identification"
+    "hypergeometric original Bishop factorial Euler limit identification",
+    "Native Bishop source phase and selected tau exponent modules have not been typechecked"
   ],
   "external_real_pi_used_in_agda_proof": false,
   "native_kernel_checked": false,
