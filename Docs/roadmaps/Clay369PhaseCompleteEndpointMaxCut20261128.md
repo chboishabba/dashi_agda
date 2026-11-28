@@ -21,3 +21,59 @@ For complex coefficients a,b,c and approximants A,B,C with errors ea,eb,ec, exac
 - Poincare: solved by Perelman; no new proof obligation.
 
 Acceptance: exact local regression is separate from native kernel and original endpoint. No CI. Attribution: classical energy/helicity Waleffe, classical interval arithmetic and Machin/Bishop pi sources; DASHI specific signed residual specialization; JMD only evidenced donors. No universal claim.
+
+
+## 28 November max-cut continuation: exact remaining physical/proof leaves
+
+### NS B — actual four-leaf S2b2d1b2 owner, NOT a new abstraction
+The default-branch file DASHI/Physics/Closure/NSTriadKNS2b2d1b2QuantitativePaymentExact.agda already inhabits six same-object source/compiler fields and identifies four UNINHABITED quantitative propositions:
+1. R571Gate.r571GateAStateDerivativeEnvelopeClosed: actual state derivative envelope for original physical Fourier output.
+2. R579.round579LiteralSignedGramResidualPaid: signed FOUR-sign original-output Gram residual, with phase/orientation retained.
+3. R568Bidi.round577SignedResponseMajorizationClosed: physical signed response majorized by original commutator/Schur output.
+4. R568Bidi.round577CutoffUniformSchurEnvelopeClosed: constant uniform in Fourier cutoff, viscosity and chosen original regularity class accounted separately.
+
+Existing full consumers: R571 finite second-moment compiler, R579 literal output enumeration and positive part convolution, R568 live commutator owner, R577 compiler, R572/R503 and R854. DO NOT change four false flags based on a finite triad or generic arithmetic. New Lean #123 Synthesis/MillenniumNSSignedSpectralResidualExact.lean gives division-free affine signed-transfer cancellation, secant numerator, quotient if x != z, exact complex cubic source telescope, norm bound and phase flip. Those constrain the R579/R571 input geometry, but do not inhabit the four fields. The original real+conjugate six-mode R734 witness and its *different sampled Gram operator* remain separate; physical phase dependence invalidates phase-blind scalar coercivity and original unrestricted W2.
+
+Next single mathematical product: on the actual R571/R579 ordered Fourier carrier define phase-complete intervals for each coefficient and exact real four-sign Gram source, prove the finite state derivative identity with actual Leray projector and spectral weights, then produce an **integrable majorant independent of cutoff** before attempting R568. A source-level finite identity alone does not imply uniformity.
+
+For k != 0 on physical periodic Galerkin modes, the original Leray equation gives the VALID finite source estimate
+  |u_hat'_k| <= nu |k|^2 |u_hat_k| + sum_{p+q=k} |q| |u_hat_p| |u_hat_q|,
+where the norm-one Leray projector, the sign of i, exact convolution normalization and all original real/conjugate pairs must be retained. The signed production should be summed BEFORE absolute values whenever legitimate cancellation is required. This is a per-mode finite derivative upper bound, not a cutoff-uniform bound or a bound in a critical space. Exact source attachment, moment integrability and cutoff independence remain unproved.
+
+### NS A and independent original continuation
+R3 original convolution measure is d^3 p (with the chosen Fourier normalization) rather than torus counting measure. The small-frequency input is the direct radial identity:
+  int_{|k|<=R} |k|^{-2} d^3k = 4*pi*R,
+  int_{|k|>R} |k|^{-4} d^3k = 4*pi/R.
+Together with energy E and dissipation D this gives X^4 <= 256*pi^2*E*D for existing smooth E,D, without bounding its survival time. For finite-horizon reference path use the exact signed error, residual, temporal seam and continuum integration, verifying the criterion on the ORIGINAL solution class. Do not transfer B's finite lattice shell count or 369 sign profile to R3. The alternative is to pay the physical signed R568 analogue on the Euclidean output directly. Both are open.
+
+### NS C/D — terminal admission is not the A/B budget
+Already source-written literal C/D and transport in Agda #1551/main are retained. Periodic pressure difference has a fixed-time native Lean #123 gauge proof; the time-dependent accelerating frame is written mathematically but needs actual smooth chain-rule/integral kernel weld. Original external theorem checks, statement match, proof dependencies and independent acceptance are separate. Do not treat C/D as A/B counterexamples unless unforced hypotheses are met.
+
+### RH — admission rather than rebuilding the analytic proof
+Lean #121 native original Clay/Mathlib BIDI, xi-zeta zero-subtype geometry and pinned axiom-log parser are source owners. First run the isolated external proof with exact pin/toolchain, ordinary axioms audit, and original theorem-name+type/hash reconciliation; then weld the canonical analytic ingress to Agda source. A claim of independent external verification is *not* a local kernel receipt. The determinant observer on master factors for its stated G2e/G2c consumers; generic RH zero/analytic admission cannot be inferred from that quotient.
+
+### BSD — source-written exactness, local completion still uninhabited
+Lean #124 Synthesis/MillenniumBSDOriginalRationalKummerConnecting.lean already contains rationalKummerHom, rationalKummerHom_ker, rationalKummerQuotientHom, quotient injectivity, and originalInclusionH1_zero_iff_rationalKummer. New theorem originalKummerExactAtH1 assembles kernel=inclusion image of the genuine quotient without substituting finite square classes. The actual next cochain-natural map must choose a compatible K->K_v completion embedding and elliptic base change, prove action-equivariant Q->Q_v and literal cocycle equality
+  f(sigma Q-Q)=sigma(f Q)-f Q
+for every local Galois element, then pass to continuous H1 and impose all local Kummer images to produce Selmer/Sha. This is not a proof of rank equality. Selected rank-four nonvanishing/vanishing must be settled against actual complex analytic derivative and global arithmetic rank separately.
+
+### Hodge — signed J / R algebra, cycle construction still uninhabited
+Lean #124 native middleStarBlock_square, middleStar_field_polynomial, middleCyclotomicLift_quad, _phi7 and _recovers_star are already present. New _seventh and _nontrivial make the scalar R action an explicit nonidentity order-seven element, and independent exact reduction verifies R^7=1 and J=R^4-R^3. Remaining theorem is a true algebraic correspondence on the SAME generic projected middle-exterior motive acting outside F, or a coupled determinant cycle whose class realizes the oriented exterior structure. A special CM point or rational matrix does not provide the required generic algebraic cycle; universal primitive detector separately remains open.
+
+### P versus NP — costed original DAG, no costless expansion
+Agda #1548 already contains PNPAggregateGateCountExact.gateCountExact and boundedDemandCNF/boundedDecode/boundedEncode with cutoff k clamped by the actual sum of excess indicators. Exact regression checked tableCost(d,k)=2+2*d*k and bounded threshold equivalence on finite rows. New priority is genuine original-machine polynomial-bit-time semantics-preserving coverage with witness decoding, not another truth-table carrier; after that, an unrestricted sharing-stable lower bound or polynomial algorithm on original SAT language. Keep length of binary input, circuit size, proof DAG sharing and encoded budget distinct. Finite counts do not prove an asymptotic separation.
+
+### Yang-Mills — source theorem identity before physical inequality
+Agda #1536 already reuses CMP102/CMP116 one common source small ball and explicitly attaches the source C-Lipschitz to R366, but leaves literal CMP99 propagator-to-H(s(Y0)) attachment and argument identity conditional. Existing master R445 source time reversal and #1444 CMP116/119/122 are original owners. Next mathematical product: source-exact coefficient+remainder-to-Bishop-limit transport at the SAME physical scale and SU(N) reflected Gibbs, then uniform full-Gibbs decay on a nontrivial interacting continuum measure, OS positivity and same-H spectral gap. The finite signed factorial cancellation does not itself supply any of these estimates.
+
+### Acceptance ledger
+Executed equivalent local SymPy regression in ordinary Python: 80/80 finite controls for signed R734 Waleffe transfers, rational Gaussian complex phase error, Euclidean radial integrals, Hodge cyclotomic quotient and actual PNP DAG cost recurrence. New committed script scripts/check_clay369_phase_complete_endpoint.py replays those five domains; its exact GitHub blob has not been independently executed in this runtime. Existing signed-row CMP102 128-row script and physical R734 real/conjugate Galerkin scripts are reused, not claimed re-executed. No Agda/Lean compiler or CI receipt on these new heads. Native source-written theorems are PENDING_KERNEL; original endpoint proof gates remain OPEN.
+
+### Implementation manifest
+- Agda #1551 roadmap and scripts/check_clay369_phase_complete_endpoint.py (this branch).
+- Lean #123 Synthesis/MillenniumNSSignedSpectralResidualExact.lean (phase-preserving actual complex carrier) commit 67f1d8cb149fe839df7d52670c1ebd08b3767e13.
+- Lean #124 Synthesis/MillenniumBSDOriginalRationalKummerConnecting.lean (original cohomology image/ker weld) commit 01c38fe0c1ebc44daf4ccdbcd4708b61e6abee90.
+- Lean #124 Synthesis/MillenniumHodgeCubicCMExplicitSeed.lean (signed exact order-seven field element) commit ca4985bb48ab0231d754000955efe62e442feb0a.
+- Original RH #121 / PNP #1548 / YM #1536 implementations intentionally not duplicated or falsely promoted.
+
+Next local gates (no GitHub CI): Python script above; source R734 phase-flip tests with their original dependencies; existing CMP102 coefficient script; native kernel check with pinned respective toolchains and no trust escapes; original-endpoint same-object producer review. A passing Python gate must not flip any open original universal theorem.
