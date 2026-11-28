@@ -140,7 +140,8 @@ def source_audit(extra_roots):
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--checkpoint", type=Path, required=True)
-    ap.add_argument("--budget", type=float, default=80)
+    ap.add_argument("--budget", type=float, default=80,
+                    help="per-stage timeout seconds (checkpoint after every stage)")
     ap.add_argument("--wrapper", default="scripts/run_agda29_parallel_check.sh",
                     help="repository-approved Agda entrypoint")
     ap.add_argument("--include", action="append", default=[])
@@ -156,12 +157,17 @@ def main():
     for key in ("AGDA_STDLIB_SRC_29", "AGDA_STDLIB_SRC"):
         if env.get(key):
             audit_roots.append(env[key])
+    xdg = env.get("XDG_CACHE_HOME", str(ROOT/".cache"))
     cache_root = Path(env.get("DASHI_AGDA29_CACHE_ROOT",
-        Path(env.get("XDG_CACHE_HOME", Path.home()/".cache"))/"dashi-agda29"))
+        str(Path(xdg)/"dashi-agda29")))
     cached_stdlib = cache_root/"agda-stdlib-experimental"/"src"
     if cached_stdlib.is_dir():
         audit_roots.append(str(cached_stdlib))
-    args.include = [str(Path(p).resolve()) for p in args.include]
+    def include_root(value):
+        root = Path(value).resolve()
+        return root/"src" if (root/"src").is_dir() else root
+    audit_roots = [str(include_root(p)) for p in audit_roots]
+    args.include = [str(include_root(p)) for p in args.include]
     audit = source_audit(audit_roots)
     audit_path = args.checkpoint.with_suffix(".audit.json")
     atomic_json(audit_path, audit)
@@ -175,8 +181,8 @@ def main():
     if not wrapper.is_file():
         print(f"BLOCKED: approved wrapper missing: {wrapper}; no acceptance", flush=True)
         return 2
-    if git("status", "--porcelain", "--untracked-files=no"):
-        raise RuntimeError("commit tracked changes before acceptance")
+    if git("status", "--porcelain"):
+        raise RuntimeError("commit all tracked and untracked source changes before acceptance")
     required_sources = [ROOT/"vendor/bishop", ROOT/"DCHoTT-Agda", ROOT/"cubical"]
     missing = [str(p) for p in required_sources if not p.is_dir()]
     if missing:
@@ -229,10 +235,6 @@ def main():
             if not log.is_file() or digest(log) != receipt["sha256"]:
                 raise RuntimeError("missing or changed stage receipt")
             continue
-        remaining = args.budget - (time.monotonic() - start)
-        if remaining <= 0:
-            print("BUDGET: earlier receipts retained", flush=True)
-            break
         log = logs/f"{i:02d}-{len(state['attempts']):04d}.log"
         argv = ["bash", str(wrapper), *flags, stage]
         print("RUN", *argv, flush=True)
@@ -240,7 +242,7 @@ def main():
             proc = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=out,
                                     stderr=subprocess.STDOUT, start_new_session=True)
             try:
-                rc = proc.wait(timeout=remaining)
+                rc = proc.wait(timeout=args.budget)
                 status = "PASS" if rc == 0 else "FAIL"
             except subprocess.TimeoutExpired:
                 os.killpg(proc.pid, signal.SIGKILL)
