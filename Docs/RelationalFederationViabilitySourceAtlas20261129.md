@@ -46,3 +46,6 @@ See [OODA source and weld crosswalk](RelationalFederationOODA20261129.md). Boyd 
 
 ## LES, proof-search, experiment design and ZKP lineage
 See [LES proof-search source and roadmap crosswalk](RelationalFederationLESProofSearch20261129.md). Original LES, proof/experiment/OODA, PrintingPress and introspective ZKP frame owners retained; #195/#224/#640/#647/#643/#777/#697/#1278/#1249/#1442 source coordinates. JMD/zkperf/zkSEC/Casey implementation context remains separately attributed, no external source copied or runtime verification claimed. Cryptographic zero knowledge and formal audit metadata remain distinct. Local synthetic extension is new DASHI work, not source ecological data.
+
+## Original Living Environment System and ITIR-suite
+See [source-attributed suite and LES reconciliation](RelationalFederationITIRSuiteLES20261129.md). Original LES implementation, DASHI latent-ecology formalization, ITIR suite-owned components and upstream third-party submodules, JMD and SLR golden/production lineages distinct. Root README, submodule manifest, component and handoff contracts inspected; uninspected components explicitly listed as such. No runtime or empirical promotion.
