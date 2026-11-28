@@ -68,3 +68,9 @@ tabulateZero zero f h = C.≈C-refl _
 tabulateZero (suc n) f h =
   h zero (s≤s z≤n) ,
   tabulateZero n (λ k → f (suc k)) (λ k hk → h (suc k) (s≤s hk))
+
+triangleZero : ∀ {n} (xs : Row n) →
+  zeroRow xs → zeroRow (triangle xs)
+triangleZero nil h = C.≈C-refl _
+triangleZero (cons x xs) (hx , hxs) =
+  hx , triangleZero (diff (cons x xs)) (diffZero (cons x xs) (hx , hxs))
