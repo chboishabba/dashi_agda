@@ -3693,3 +3693,34 @@ module At {r : Level} (F : C.RealField r)
 
   -- No analytic trace, variable high-order tame or continuum existence
   -- witness is inferred from these algebraic expressions.
+
+
+  ------------------------------------------------------------------------
+  -- BR108/111: original F wave-adapted generator expressions.
+  -- The scalar root reciprocal is supplied; no division by a
+  -- characteristic zero is assumed. Graph displacement is retained.
+  ------------------------------------------------------------------------
+  originalFWaveLiftAmplitude : S → S → S
+  originalFWaveLiftAmplitude inverseRoot scaleJump =
+    neg (half * inverseRoot * scaleJump)
+
+  originalFWaveLiftMixed : Vec → S → Vec
+  originalFWaveLiftMixed q generatorValue a = q a * generatorValue
+
+  originalFWaveLiftScale : S → S
+  originalFWaveLiftScale normalGeneratorDerivative =
+    normalGeneratorDerivative
+
+  originalFGraphLieJump : S → S → (Wall → Wall → S) →
+    Wall → Wall → S
+  originalFGraphLieJump j v h a b = two * j * v * h a b
+
+  -- BR111: gauge-preserving generator defect is the derivative
+  -- of the fixed-source gauge map MINUS its covector Lie transport.
+  originalFGaugeGeneratorDefect : Cov → Cov → Cov
+  originalFGaugeGeneratorDefect variedGauge lieGauge a =
+    variedGauge a - lieGauge a
+
+  -- Analytic identity: D Ered(Lie_V g) = Lie_V Ered - symgrad(P_g V).
+  -- These are source expressions, not an admitted inverse for P_g,
+  -- nor the curved graph lift or variable glancing estimate.

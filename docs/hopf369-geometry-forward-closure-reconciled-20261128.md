@@ -974,3 +974,144 @@ wall forcing, with actual variable coefficients and same-chart
 corners. Full W2/3/6 remain open; BR98 follows only on actual F
 reduced development. No physical Weyl or weighted exterior
 acceptance inferred.
+
+
+## 12. BR108–111 — wave-adapted F lift, joint glancing bound and moving-chart weld
+
+Reconciled BR4 fixed-material conformal source and BR6/19 free graph
+normal force, BQ conformal gauge/source-jump and derivative-source
+resonance negative control, BR102 and BR104–107 curved scale and
+Dirichlet trace, BR35/37 finite warped Green and Lorentz machinery.
+Do not replace the source with a derivative-dependent harmonic gauge:
+BQ already has a resonant loss control. No second spatial constraint
+solve. Classical Green kernels, wave energy and diffeomorphism
+naturality are prior mathematics; DASHI-specific result is the
+joint original F normal-scale/Dirichlet-trace/metric-lift composition.
+
+### BR108 — homogeneous wave lift, rather than prescribed collar profile
+
+For the normalized flat principal half-line pair use y>0 and y<0,
+same oriented derivative ∂y and z=(s,i xi), s=gamma+i omega,
+gamma>0, ell²=s²+|xi|², Re ell=a>0. Prescribe scale jump p=[l]
+(l=p_nn/2). Choose scalar generator V=v ∂y with
+ v+=A exp(-ell y), v-=A exp(ell y), A=-p/(2ell).
+Then [v]=0, [∂y v]=p, [∂y² v]=0, and Box v=0 on each side.
+For L=Lie_V eta, H_L=0, b_L=z v, l_L=∂y v.
+Thus [H_L]=[b_L]=0, [∂y H_L]=0, [∂y b_L]=z p,
+[l_L]=p, [∂y l_L]=0. Each L channel solves the homogeneous
+bulk wave. Subtract L from a flat principal F metric solution:
+the residual has full value and normal derivative transmission
+and unchanged bulk forcing. The mean-force row does NOT vanish
+on L separately, since tau_L=-Box_wall v; it was used upstream
+in the U/scale equation. Reconstruction is a source decomposition,
+not a replacement F solution. For arbitrary forcing with nonzero
+additional original row jumps those must still be lifted separately.
+In physical variables this generator has nonzero common wall value;
+it is NOT a diffeomorphism fixing the material wall pointwise.
+For homogeneous decaying half-line generators imposing v+=v-=0
+at wall forces A=0 on both sides and cannot produce p!=0.
+Do not hide this obstruction behind BR107 collar extension.
+
+### BR109 — estimate the three operators jointly
+
+Given zero initial/lifted data in the Laplace transformed flat
+half-line scalar Dirichlet problem (∂r²-ell²)w=F on r>=0,
+the normal derivative at zero is -integral exp(-ell r)F dr,
+up to the chosen orientation. Its norm is exactly
+(2a)^(-1/2). For the jump on both faces, in the direct-sum
+L² norm, the functional norm is a^(-1/2). In the homogeneous
+principal BR105 wall equation p has magnitude |jump n w|/L²,
+L=|ell|. Additional gauge/inhomogeneous wall terms are not
+included in this particular bulk-to-bulk estimate.
+The wave lift v has two-face L² norm |p|/(2L sqrt(a)).
+Consequently for m=max(|s|,|xi|), D=max(m,L),
+the product mapping F to any second derivative of v
+(one derivative of metric L, apart from fixed tensor/norm constants)
+is bounded by D²/(2 L³ a).
+
+Exact root bounds: write ell=a+i b.
+ (a²-gamma²)(a²+omega²)=a² |xi|², so a>=gamma.
+ a² L²-gamma² |s|²=a⁴-gamma⁴ >=0.
+ a² L²-gamma² |xi|²=a²(a²-gamma²)+gamma²(b²+gamma²)>=0.
+Hence a L>=gamma m, L²>=gamma m, L²<=2m².
+It follows that D²/(2 L³ a)<=gamma^-2.
+This is uniform in tangential frequency on the entire damped
+half-line flat domain, including glancing, not just a ray.
+By Plancherel this gives a weighted L² spacetime bound for
+one metric derivative of the homogeneous lift from a bulk
+Dirichlet-wave L² source. For an H^k tangential weight the same
+multiplier bound holds if the input has the same weight.
+It does not control one EXTRA metric derivative from that same
+source; nor replace the variable curved BR106 source by a free
+given L² source. The latter has second metric derivatives.
+
+### BR110 — sharp loss of separated estimates
+
+On s=gamma+i r, |xi|=r, L²=sqrt(gamma^4+4 gamma² r²),
+a²=(L²+gamma²)/2. The squared operator norm from
+|s|p to ∂t²v is |s|²/(4L² a), asymptotic to
+sqrt(r)/(8 gamma^(3/2)). The isolated wall H¹-to-metric
+H¹ lift thus loses a quarter tangential derivative in norm.
+The exact squared joint norm for ∂t²v from the two-face
+Dirichlet source is |s|^4/(4L^6 a²), asymptotic to
+1/(32 gamma^4). This is bounded as r grows: the correlation
+of the Green trace with the wall inverse and lift is essential.
+An extra tangential derivative multiplies the latter norm
+by |s| and diverges. Therefore the BR106 second metric jet
+source cannot be fed into an H¹ estimate as though it were
+controlled by H¹ energy alone. Need a curved commutator
+factorization, higher-order coupled estimate or alternative
+formulation; do not claim derivative-loss-free nonlinear closure.
+
+### BR111 — exact curved Lie-source intertwining and chart boundary
+
+Use actual reduced equation Ered(g)=Ric(g)+4g-S_g(C(g)),
+where C is the covector gauge relative to a fixed reference
+connection and algebraic prescribed H (possibly dependent on x,g).
+Let k=Lie_V g and define P_g V=D C_g[k]-Lie_V C(g).
+Naturality of Ric, g and symgrad when both metric AND covector
+are varied gives exactly
+ D Ered_g[Lie_V g]=Lie_V Ered(g)-S_g(P_g V).
+This is on the actual reduced metric, even if C!=0. The
+linearized contracted connection applied to Lie_V g has
+principal Box_g V; all reference-connection, prescribed
+algebraic source and Lie_C corrections are at most first
+order in V for given smooth g. Thus P_g is normally
+hyperbolic on generators (with actual lower coefficients).
+If P_g V=0 and Ered=0, the Lie metric lift solves the
+homogeneous linearized reduced equation, with no derivative
+of the wall forcing in its bulk equation. The exact identity
+is analytic by naturality, not a general curved symbolic
+certificate: local oracle independently constructs metric
+first jets from nonorthogonal constant Lorentz g and
+arbitrary second jets of V, obtains dGamma and nonzero
+reference/source lower terms, and verifies the principal
+BoxV splitting. It does not assert a solution of P_g V=0.
+
+Moving boundary: with common trace V (physical frames),
+its normal component v moves the wall. Tangential Lie metric
+jump includes 2[K]v=2jh v. The graph displacement -v
+cancels it in the material induced-metric variation, as in
+BR6/19. It cannot be ignored if using the fixed material F
+system. To consume the curved lift, derive the remaining
+mixed/normal value and Israel/gauge derivative rows of the
+combined (Lie_V g, graph=-v) lift in the actual two-chart
+frames, and reverse-solve compatible vector transmission data.
+A fixed material coordinate change vanishing on the wall
+does not have the BR108 homogeneous lift degrees of freedom.
+Retain harmonic-source transport (do not transform a fixed
+H as a tensor under arbitrary diffeomorphism). No assumption
+that actual BN nonzero data become reflection invariant.
+Check full graph source, corners and invertible chart map.
+
+**Acceptance:** local SymPy 1.14.0 four bounded stages all exit 0,
+byte-identical Git blob 77518b343a2bc23332a16087968aa0a84212d19e;
+receipt committed. Native algebraic source constructors added,
+kernel unrun; no CI requested. Next P0: actual variable
+P_g vector transmission and material graph row lift, Green
+composition for finite warped collar then variable geometry
+(not separate trace/lift estimates), BR106 top-order factor
+or coupled energy with adequate derivative regularity,
+W0 same-chart high corners, W6 actual reduced existence.
+W4a remains conditional BR98; W4b/W5 separate. Do not promote
+a flat half-line estimate into an actual nonzero curved IBVP.

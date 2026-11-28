@@ -1,0 +1,8 @@
+Local SymPy 1.14.0; OPENBLAS_NUM_THREADS=1 timeout 90 python /tmp/br108_111.py --part <lift|joint|glancing|naturality>
+All four exit 0. Git blob 77518b343a2bc23332a16087968aa0a84212d19e
+SHA256 3d0fd9fa98ac6b16a59d8cf0d2968ba8bf37d834414cc09a25bf1954e2da0273
+PASS BR108 homogeneous wave lift, exact metric trace/normal jump, fixed-wall Dirichlet obstruction
+PASS BR109 exact root inequalities and joint Green/scale/lift bound; sample controls
+PASS BR110 separate lift quarter-derivative loss, bounded joint composition, next-order obstruction
+PASS BR111 inverse/source variation algebra and moving-wall Lie displacement cancellation
+Scope: flat half-line source composition, exact algebra and analytic curved naturality identity only; no Agda kernel, CI, curved PDE acceptance.
