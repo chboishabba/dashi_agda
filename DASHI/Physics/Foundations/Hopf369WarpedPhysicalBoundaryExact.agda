@@ -1812,3 +1812,66 @@ module At {r : Level} (F : C.RealField r)
   -- an independent signed forcing in BR42/45, not an assumed positive
   -- multiple of the Israel Hessian. Its control needs actual metric
   -- regularity and timelike/spacelike material guard.
+
+  ------------------------------------------------------------------------
+  -- BR51: graph error as actual five differentiated physical components.
+  -- This isolates the precise geometric factor needed for BR44 tame
+  -- absorption; the inequality itself belongs to the REAL positive
+  -- Hilbert-space owner, not arbitrary complex-bilinear arithmetic.
+  ------------------------------------------------------------------------
+
+  normalSpaceDelta : BR4Space → S
+  normalSpaceDelta spaceNormal = U
+  normalSpaceDelta spaceX = O
+  normalSpaceDelta spaceY = O
+  normalSpaceDelta spaceZ = O
+
+  graphDefectTimeCoefficient : ADMPhysicalPoint →
+    MaterialGraphGradient → S
+  graphDefectTimeCoefficient g f =
+    neg (inverseLapseSquared g * graphAdvectiveTime g f)
+
+  graphDefectSpatialCoefficient : ADMPhysicalPoint →
+    MaterialGraphGradient → BR4Space → S
+  graphDefectSpatialCoefficient g f i =
+    sumBR4Space (λ k →
+      spatialInverse g k i * materialGraphSpaceNormal f k)
+      - normalSpaceDelta i
+      + inverseLapseSquared g * graphAdvectiveTime g f * fourShift g i
+
+  scalarGraphDefect : ADMPhysicalPoint → MaterialGraphGradient →
+    S → (BR4Space → S) → S
+  scalarGraphDefect g f timeVelocity spatialVelocity =
+    volumeDensity g *
+      (graphDefectTimeCoefficient g f * timeVelocity
+      + sumBR4Space (λ i →
+          graphDefectSpatialCoefficient g f i * spatialVelocity i))
+
+  record OriginalGraphDefectPayment : Set r where
+    constructor originalGraphDefectPayment
+    field
+      actualGraphDefect : S
+      coefficientResolvedDefect : S
+      coefficientResidual : S
+      originalTimeCoefficient : S
+      originalSpatialCoefficients : BR4Space → S
+  open OriginalGraphDefectPayment public
+
+  originalGraphDefectPayment : ADMPhysicalPoint → MaterialGraphGradient →
+    S → (BR4Space → S) → OriginalGraphDefectPayment
+  originalGraphDefectPayment g f ut du =
+    originalGraphDefectPayment
+      (materialGraphFlux g f ut du
+        - volumeDensity g * du spaceNormal)
+      (scalarGraphDefect g f ut du)
+      (materialGraphFlux g f ut du
+        - volumeDensity g * du spaceNormal
+        - scalarGraphDefect g f ut du)
+      (graphDefectTimeCoefficient g f)
+      (graphDefectSpatialCoefficient g f)
+
+  -- The physical real-field Cauchy payment is
+  -- |J_F-D ∂n u|² <= D² (|k_t|²+sum_i|k_i|²)
+  --                         (|u_t|²+sum_i|u_i|²).
+  -- It is pointwise and is independent of BR37 frequency/glancing
+  -- tame losses; full high-order physical graph/source control remains.
