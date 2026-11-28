@@ -489,3 +489,8 @@ NS divergence heat identity and integrated energy tail, Hodge actual affine clos
 ## Section 19 — original carrier advances
 
 BSD explicit actual split doubling 1cba973d61a4, Hodge full-coordinate homogenized cone kernel and h-saturation b257907ab3f8, NS ordered reality covariance 62ef5713d71a and AB import 7999cc7057da, YM signed ordered derivative 595945568544, PNP reserved exterior search 7987ab9699bd. See consolidated roadmap 703761273f04. 2827 local scoped controls, not native acceptance. RH/forced NS pinned replay and unforced physical certificate remain blocked. No universal endpoint promotion.
+
+
+## Section 20 — original carrier advances
+
+Original finite NS ODE/local existence and bounded-ball reality (#123 c515e2aa71e6; AB import 28ab0c54090d), actual split BSD Kummer value (#124 226757cc1778), actual Hodge cone homogeneous ideal (#124 178be82a6f1b), reversible signed-word body velocity (#15 79d5b59751a5), and actual disjoint epoch injection (#119 1d1a435ba629) are source-written. See consolidated Section 20 roadmap 92e26c2caa51. Independent regression 6172/6172, tested bytes verified at a0c3795c7390. Native kernel absent; no universal endpoint promotion.
