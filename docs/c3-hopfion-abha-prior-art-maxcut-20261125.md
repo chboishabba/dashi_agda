@@ -2746,3 +2746,33 @@ This is a genuine algebraic *bidirectional* reconstruction of the entire extrins
 **P0d:** prove BS13/BR31 full weighted curvature-to-metric quotient (including exterior, tangential gauge, all holonomies) and a continuous local PDE solution/iteration/continuation on one physical data set. BR57 gives the exact forced normal inverse, not this global theorem.
 
 **Test policy:** New `BR59/60/61/62/63` source checks are registered under `scripts/run_hopf369_br39_42_bounded.py --part frontier`, which now covers BR52–63. Ten BR60 shape components run in separate <=90s checkpoints; no CI and no local test or Agda kernel execution in this implementation pass. All new source files are **COMMITTED_UNRUN / CONSTRUCTED_PENDING_KERNEL**. This is intentional, not a claim of kernel acceptance or of a solved 5D Einstein–Israel boundary PDE.
+
+
+## BR64 — original nonlinear Israel ↔ reference ten-row geometric BIDI
+
+After BR59–63, there is an especially strong finite **bidirectional geometric source weld** that does not require a PDE estimate and must not be hidden behind the former general "moving-wall Jacobian gap." On the physical *matched induced wall* with background reference `k_+=j/2`, `k_-=-j/2`, define the original full shape-linearized Israel tensor and the ten geometric reference Israel rows:
+```
+  delta I_ab = [delta K_ab]
+        -eta_ab tr_eta[delta K]
+        -j(delta h_ab-eta_ab tr_eta delta h)
+        +3 (delta j) eta_ab.
+  R_ab = 2[delta K_ab]-2j delta h_ab .
+```
+Directly by **four-dimensional trace reversal**, with all ten symmetric original components and actual BR60 unit-normal/shape derivatives:
+```
+  delta I = 1/2(R-eta tr_eta R)+3(delta j)eta.
+  R = 2{delta I-3(delta j)eta
+        -(1/3)eta tr_eta[delta I-3(delta j)eta]}.
+```
+The two conversions are mutually inverse over a characteristic-zero physical scalar field. They contain **no tangential frequency inverse**, survive `q²=0` and `q=0`, retain trace/tension and all six Codazzi-free modes, and give an explicit same-source conversion between the *geometrically defined* BR34-style Israel row tensor and the true first variation of nonlinear physical Israel. This is NOT a proof that the separate BR34 normalized optical row input already is the geometric R: BR14's optical normalization, BR19 wall graph shift, BR48/49 material conormal and the original first-order warped connection must still be applied and compared.
+
+New owner `scripts/check_hopf369_br64_full_israel_optical_bidi.py` imports **the actual BR61 two-face metric and extrinsic variation**, checks all ten forward/inverse components and a nonzero variable tension source, and preserves unmatched-induced and omitted-tension negative controls. Native `originalGeometricIsraelRows`, `originalTraceReverseFour`, `originalTraceUnreverseFour`, `originalFullShapeFromReference`, `originalReferenceFromFullShape` and `OriginalFullIsraelBidirectionalWeld` give the exact Agda proof-body targets without postulates or false typecheck claims. The witness fields require the original two-face induced/graph compatibility and both reverse equalities; the remaining analytic PDE estimates are independent. BR64 is registered in the bounded `--part frontier` runner.
+
+**Max-cut promotion accounting through BR64:**
+
+- P0-geometry: Actual ADM, defining-function normal, full nonlinear second fundamental form, its Fréchet derivative, two-face matched Israel tensor, Codazzi 4/10 factorization and full ten-component trace-reversal inverse are now *written* in BR48–64. Only the **explicit source transformation equality** between physical BR61 geometric rows and original BR34 optical/BR19 moving-normal rows remains, with first-order connection terms and separate D/E gauge rows. Do not reconstruct any of these proven geometry identities from scratch.
+- P0-boundary estimate: The BR43 real H¹ normal trace, BR45 variable coefficient derivative identity, BR47 eighth-order D/E coefficient Leibniz, BR52/54 all eighth-order material product and BR56 quantitative graph ledger exist. The genuine unproved mathematical weld is a **closed high-order energy/trace/Kreiss estimate on the same variable nonlinear physical solution**, with BR37 glancing loss and BR31 domain, not a new scalar energy identity.
+- P0-Bianchi: The exact BR55 curved harmonic source, original BR29 rank-nine projected Maxwell/Weyl subsidiary and BR62 Codazzi rank are distinguished and co-owned. The remaining proof is the **actual nonlinear curved wall Bianchi source factoring into the constructed BR61 Israel/Codazzi graph** and a variable-coefficient subsidiary uniqueness estimate that respects the original rank12 wall-only Gram no-go.
+- P0-reconstruction and continuation: BR57 supplies a genuine *normal* shear inverse with original moment, BR63 full finite wall jump inverse. The remaining weighted BS13 curvature-to-metric reconstruction involves tangential York/Hodge gauge and all global holonomy/exterior modes, followed by an actual continuous PDE iteration and BR42 uniform restart. No finite source checker or uninhabited Agda record establishes these endpoints.
+
+**Acceptance state:** BR59–64 checkers and native additions are COMMITTED_UNRUN / CONSTRUCTED_PENDING_KERNEL by user direction. BR59 additionally refuses off-wall evaluation and any non-positive/unknown spacelike-normal guard; do not infer geometric positivity from a sample or from a complex-field record. Bounded runner `--part frontier` includes all new source sections, with BR60 ten components each in a separate <=90s stage. No GitHub CI was triggered and no theorem promotion is claimed.
