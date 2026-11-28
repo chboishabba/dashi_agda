@@ -84,12 +84,23 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
             -F(float(cfg['auxiliary_J'])))
     def box(lo,hi,parent_upper):
         nonlocal seq,replay_count,failed,best
-        if lo.sum()>budget: return
-        # Tighten each coordinate by the others' minimum feasible allocation.
-        hi=np.minimum(hi,budget-(lo.sum()-lo))
-        if np.any(hi<lo):return
-        mid=(lo+hi)/2; slack=budget-lo.sum()
-        if mid.sum()>budget:mid=lo+(mid-lo)*slack/max((mid-lo).sum(),1e-300)
+        # Exact mode must not remove a feasible binary-chart box using
+        # rounded sums or rounded upper-face tightening. An infeasible
+        # center can still enclose the whole box, but cannot be a witness.
+        if exact_ceiling is not None:
+            B=F(float(budget))
+            if sum((F(float(v)) for v in lo),F(0))>B: return
+            mid=lo+(hi-lo)/2
+            center_feasible=sum((F(float(v)) for v in mid),F(0))<=B
+        else:
+            if lo.sum()>budget: return
+            hi=np.minimum(hi,budget-(lo.sum()-lo))
+            if np.any(hi<lo):return
+            mid=(lo+hi)/2; slack=budget-lo.sum()
+            if mid.sum()>budget:mid=lo+(mid-lo)*slack/max((mid-lo).sum(),1e-300)
+            center_feasible=bool(mid.sum()<=budget)
+        if np.any(mid<lo) or np.any(mid>hi):
+            raise ArithmeticError('invalid box center')
         cc=dict(cfg,fixed_horizon=True,retain_sensitivity=True,retain_history=False,
                 heating_W=np.zeros_like(cfg['heating_W']),load_rate_s_inv=mid)
         upper=parent_upper
@@ -104,8 +115,8 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
                 en=reflection_enclosure(out['sensitivity_trace'],mid,lo,hi,dt,port,edge,'terminal_load_rate_s_inv' in cfg)
                 upper=min(upper,ceiling-en['reflection_lower_J'])
             score=out['strict_campaign_net_J']
-            if score is not None and np.isfinite(score):best=score if best is None else max(best,score)
-        except (ValueError,AssertionError,np.linalg.LinAlgError,FloatingPointError):
+            if center_feasible and score is not None and np.isfinite(score):best=score if best is None else max(best,score)
+        except (ValueError,AssertionError,ArithmeticError,np.linalg.LinAlgError,FloatingPointError):
             failed+=1 # retain parent upper; never discard failed region
         seq+=1; heapq.heappush(queue,(-upper,seq,lo,hi))
     lo=np.zeros(ne); hi=np.zeros(ne); hi[ids]=budget
@@ -116,7 +127,9 @@ def bound_layout(material,cfg,ids,budget,max_boxes=8):
         j=int(np.argmax(hi-lo))
         if hi[j]==lo[j]:
             seq+=1; heapq.heappush(queue,(neg,seq,lo,hi)); break
-        m=(lo[j]+hi[j])/2
+        m=lo[j]+(hi[j]-lo[j])/2
+        if not lo[j]<m<hi[j]:
+            seq+=1; heapq.heappush(queue,(neg,seq,lo,hi)); break
         h=hi.copy(); h[j]=m
         l=lo.copy(); l[j]=m
         box(lo,h,-neg);box(l,hi,-neg)
