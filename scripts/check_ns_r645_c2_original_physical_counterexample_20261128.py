@@ -22,6 +22,11 @@ or a formal theorem about a rational-only artificial helical surrogate.
 Reuse existing exact script and R225/R388/R406/R652/R687 original source;
 do not build another Fourier evaluator.
 """
+# Fail closed: Python -O strips all assert statements used by this exact
+# finite physical source checker. Never print PASS in optimized mode.
+if not __debug__:
+    raise RuntimeError("NS exact physical regression requires asserts: refuse python -O")
+
 from collections import defaultdict
 from sympy import I, S, Matrix, simplify
 from check_ns_r726_signed_defect_physical_source_exact_20261128 import (
