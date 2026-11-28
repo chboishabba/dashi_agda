@@ -1,0 +1,86 @@
+{
+  "programme": "Solar-Earth Filsinger G6/G8 support-stratified max-cut",
+  "date": "2026-11-28",
+  "runtime": {
+    "python": "local container",
+    "sympy": "1.14.0",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "CI": false,
+    "Agda": false,
+    "Lean": false
+  },
+  "source_parity": {
+    "support_transition_git_blob": "379ee558988ae0374f4d1b7af0083e28ae561b7d",
+    "support_transition_sympy_git_blob": "5a07eecfe59f83c49b0005a67755dfae9a035c36",
+    "boundary_cayley_git_blob": "ca09a34f3db30e298577de01160a8ff312a383be",
+    "boundary_sympy_git_blob": "f17dd277a72672ee4756752426a864137778a6bc"
+  },
+  "executed": [
+    {
+      "test": "check_solar_support_transition_sympy.py",
+      "status": "PASS",
+      "cases": 52,
+      "species_energy_identities": 156,
+      "charge_neutral": true,
+      "births": 23,
+      "extinctions": 6,
+      "byte_identical_to_committed": true
+    },
+    {
+      "test": "check_solar_support_boundary_cayley_sympy.py",
+      "status": "PASS",
+      "dimension": 3,
+      "gyro": true,
+      "collision": true,
+      "right_derivative_match": true,
+      "naive_left_resolvent_rejected": true,
+      "byte_identical_to_committed": true
+    },
+    {
+      "test": "solar_support_boundary_cayley.py reproduced with scipy",
+      "status": "PASS",
+      "epsilons": [
+        0.01,
+        0.001,
+        0.0001,
+        0.00001
+      ],
+      "absolute_errors": [
+        0.00012444649576371993,
+        0.000012444652220644305,
+        0.000001244466751893747,
+        1.2445600106050308e-7
+      ],
+      "incompatible_base_rejected": true,
+      "byte_identical_to_committed": true
+    },
+    {
+      "test": "solar_support_transition.py with exact copied original solar_physical_causal.event dependency",
+      "status": "PASS",
+      "cases": 3,
+      "original_event_ledger_identical": true,
+      "births": 3,
+      "extinctions": 3,
+      "unchanged_support_case": true,
+      "negative_control_uninhabited_current": true,
+      "wrapper_byte_identical_to_committed": true,
+      "original_event_dependency_source_copied_not_repo_full_execution": true
+    }
+  ],
+  "pending": [
+    {
+      "test": "check_solar_support_transition_native.py against actual repo dependency graph",
+      "status": "PENDING_NATIVE_EXECUTION"
+    },
+    {
+      "test": "check_solar_spherical_reverse_integration.py 24-cell",
+      "status": "PENDING_NATIVE_EXECUTION"
+    },
+    {
+      "test": "physical original-source receiver work and global passive",
+      "status": "OPEN"
+    }
+  ],
+  "scope": "One-sided local chart; off-site stage/schedule new-support weld unpaid. No restored positive physical endpoint or global atmospheric passive result."
+}
