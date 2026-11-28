@@ -167,6 +167,16 @@ PARTS={
   ]
 }
 
+# Terminal source checks, independently checkpointed.
+PARTS["terminal"]=[
+ ("BR178.symbol","check_hopf369_br178_180_cartan_radial.py",("--part","symbol")),
+ ("BR180.radial","check_hopf369_br178_180_cartan_radial.py",("--part","radial")),
+ *[(f"BR181185.{p}","check_hopf369_br181_185_terminal_bridges.py",("--part",p)) for p in ("cartan","radial","shell","observables","material")],
+ ("BR186.shell","check_hopf369_br186_interacting_shell.py",()),
+ ("BR187.atomic","check_hopf369_br187_188_full_shell_lifespan.py",("--part","atomic")),
+ ("BR188.lifespan","check_hopf369_br187_188_full_shell_lifespan.py",("--part","lifespan")),
+]
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -232,7 +242,7 @@ def stage(label,script,args,receipts,identity,seconds):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--part",choices=("fast","heavy","frontier","closure","all"),default="frontier")
+    parser.add_argument("--part",choices=("fast","heavy","frontier","closure","terminal","all"),default="frontier")
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--seconds",type=int,default=90)
     args=parser.parse_args()
@@ -240,7 +250,7 @@ def main():
     args.output.mkdir(parents=True,exist_ok=True)
     ident=manifest_hash()
     if args.part=="all":
-        plans=PARTS["fast"]+PARTS["heavy"]
+        plans=PARTS["fast"]+PARTS["heavy"]+PARTS["terminal"]
     elif args.part=="closure":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
                if p[0].split(".")[0] in {"BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88","BR89","BR90","BR91","BR92","BR93","BR94","BR95","BR96","BR97","BR98","BR99","BR100","BR101","BR102","BR103","BR104","BR105","BR106","BR107","BR108","BR109","BR110","BR111","BR112","BR113","BR114","BR115","BR116","BR117","BR118","BR119","BR120","BR121","BR122","BR123","BR124","BR125","BR126","BR127","BR128","BR129","BR130","BR131","BR132","BR133","BR134","BR135","BR136","BR137","BR138","BR139","BR140","BR141","BR142","BR143","BR144","BR145","BR146","BR147","BR148","BR149","BR150","BR151","BR152","BR153","BR154","BR155","BR156","BR157","BR158","BR159","BR160","BR161","BR162","BR163","BR164","BR165","BR166","BR167","BR168","BR169","BR170","BR171","BR172","BR173","BR174","BR175","BR176","BR177"}]
@@ -249,6 +259,7 @@ def main():
                if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78","BR79","BR80","BR81","BR82","BR83","BR84","BR85","BR86","BR87","BR88","BR89","BR90","BR91","BR92","BR93","BR94","BR95","BR96","BR97","BR98","BR99","BR100","BR101","BR102","BR103","BR104","BR105","BR106","BR107","BR108","BR109","BR110","BR111","BR112","BR113","BR114","BR115","BR116","BR117","BR118","BR119","BR120","BR121","BR122","BR123","BR124","BR125","BR126","BR127","BR128","BR129","BR130","BR131","BR132","BR133","BR134","BR135","BR136","BR137","BR138","BR139","BR140","BR141","BR142","BR143","BR144","BR145","BR146","BR147","BR148","BR149","BR150","BR151","BR152","BR153","BR154","BR155","BR156","BR157","BR158","BR159","BR160","BR161","BR162","BR163","BR164","BR165","BR166","BR167","BR168","BR169","BR170","BR171","BR172","BR173","BR174","BR175","BR176","BR177"}]
     else:
         plans=PARTS[args.part]
+    if args.part in ("closure","frontier"): plans += PARTS["terminal"]
     outcome={}
     for label,script,opts in plans:
         outcome[label]=stage(label,script,opts,args.output,ident,args.seconds)
