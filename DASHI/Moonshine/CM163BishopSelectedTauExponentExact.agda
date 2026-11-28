@@ -109,3 +109,28 @@ module FromTwoOriginalAtans
 -- exp_C(2i atan_B(1/5)), exp_C(2i atan_B(1/239)) evaluations.
 -- The product, complex-coordinate identification, actual tau argument,
 -- negative Machin phase and real radius are source-written producers.
+
+
+-- ORIGINAL SOURCE OWNER RECONCILIATION (2026-11-28):
+-- BishopOriginalMachinCayleyEndpointExact ALREADY constructs the actual
+-- two evaluated Bishop arctangent/Cayley phases via the original
+-- clipped-mesh O(h^2) constant-phase argument. Thus these are no
+-- longer independently supplied hypotheses on this implementation path.
+-- No substitute complex exp, no imported classical pi.
+
+import DASHI.Analysis.BishopOriginalMachinCayleyEndpointExact as Endpoint
+
+module FromOriginalBishopEndpoint (inputs : Round11.BishopCutset) where
+
+  module Actual = FromTwoOriginalAtans inputs
+    (Endpoint.originalFive inputs)
+    (Endpoint.original239 inputs)
+
+  actualOriginalCMQ :
+    C._≈C_ Actual.actualBishopExpQ CM.q
+  actualOriginalCMQ = Actual.actualBishopCMQ
+
+-- The remaining parameter is the existing Round11.BishopCutset
+-- needed by the genuine original Bishop complex exponential carrier,
+-- not a pair of Machin phase evaluations. Its construction/default
+-- instance must be checked independently; no new Cutset is invented.
