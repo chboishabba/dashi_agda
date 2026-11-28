@@ -12,9 +12,9 @@ This is not a Lean/Agda kernel or Clay endpoint acceptance.
 """
 from fractions import Fraction as Q
 from itertools import product
-from math import prod
+from math import factorial
 
-checks={"NS_epsilon":0,"NS_negative_radius":0,"PNP_preterminal":0}
+checks={"NS_epsilon":0,"NS_negative_radius":0,"PNP_preterminal":0, "YM_last_B":0}
 for nu,emax,eps in product(
         (Q(1,2),Q(1),Q(3,2)),
         (Q(0),Q(1),Q(9)),
@@ -35,6 +35,17 @@ for nu,emax,eps in product(
         if not (emax<2*nu*r*r*eps):
             assert emax/(2*nu*r*r)>=eps
             checks["NS_negative_radius"]+=1
+
+# The ACTUAL source b_n=1/(2n+3)! decreases to its singleton 1/6;
+# the omitted linear coefficient 2*b_n is therefore <=1/3
+# for EVERY tested original degree, independent of the sign of X.
+for n in range(256):
+    b=Q(1,factorial(2*n+3))
+    assert b<=Q(1,6)
+    assert 2*b<=Q(1,3)
+    if n:
+        assert b < Q(1,factorial(2*(n-1)+3))
+    checks["YM_last_B"]+=3 if n else 2
 
 # Exhaust deterministic 1-bit state machines with two possible
 # observations, fixed initial states and a 2-step clock.
