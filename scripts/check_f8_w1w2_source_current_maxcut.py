@@ -41,6 +41,8 @@ SCRIPTS=(
     "check_f8_outgoing_flux_caps.py",
     "check_f8_characteristic_conormal_time6.py",
     "check_f8_time6_initial_compatibility.py",
+    "check_f8_characteristic_lift_symmetrizer.py",
+    "check_f8_characteristic_lift_source6.py",
     "check_f8_original_pulse_derivative_bounds.py",
     "check_f8_full_ward_jet_majorant.py",
     "check_f8_original_pulse_jet_receipt.py",
