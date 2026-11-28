@@ -2894,3 +2894,91 @@ Original BR34 row count remains metric 30, gauge 10; every D/E prefix and normal
 4. **Weighted quotient and continuous construction**: BS13/BR57 exact normal inverse already exists; add tangential York/gauge/Hodge control, full BR31 reflecting AdS weighted exterior and holonomy quotient, physical local PDE iteration and BR42 continuation. The theorem remains unproved until genuine analytic estimates and Agda/Lean acceptance are completed.
 
 **Status**: BR68–72 = COMMITTED_SOURCE / CONSTRUCTED_PENDING_KERNEL; no symbolic scripts executed, no native Agda kernel pass, no physical PDE theorem pass. Attribution: ADM/Israel/Codazzi and frame projection are classical; DASHI owner contribution is exact original D/E source crosswalk, signed slots, same-input time jets and non-promotion negative controls.
+
+
+## BR73–78 — consolidated nonlinear physical energy and Ward max-cut; supersedes BR48 coordinate-C positivity gate (28 Nov 2026)
+
+**This section corrects an earlier overly restrictive assumption, rather than layering on another placeholder.** The previous BR48/45 source uses the coordinate-symmetrizer e=(A u_t²+C^{ij}u_i u_j)/2, and its positivity requires C>0, i.e. a subluminal ADM shift in that coordinate energy. **That is NOT a physical necessity for a spacelike ADM foliation.** The physical future unit slice normal and positive H give a different, shift-robust energy. The remaining closure must use the original metric through this normal-frame symmetrizer, together with the true moving-wall flux, instead of imposing the stronger chart-velocity restriction without justification.
+
+### BR73 — positive normal-frame energy at unrestricted ADM shift
+
+Reuse the BR48 **same physical ADM source**:
+```
+g=-N²dt²+H_ij(dx^i+v^i dt)(dx^j+v^j dt), D=N sqrt(det H),
+A=D/N², B^i=A v^i, C^ij=D H^ij-A v^i v^j.
+```
+The exact *physical* normal-frame energy is
+```
+E_normal=(A(u_t-v·grad u)²+D H^{ij}u_i u_j)/2.
+E_normal-E_coordinate= -B^i u_i u_t + A(v^i u_i)².
+```
+This is strictly positive for nontrivial real field jets at N>0, H>0 and D>0, regardless of how large the coordinate shift v is. Its positive block Gram satisfies
+```
+M_normal=[[A,-B^T],[-B,C+2BB^T/A]],
+Schur(M_normal,A)=D H^-1>0.
+```
+The exact negative control has N=D=1,H=I,v_n=3,u_t=0,u_n=1: coordinate e=(1-9)/2=-4, while E_normal=(9+1)/2=5. Thus `C>0` is a **sufficient condition for the old coordinate multiplier**, not a legitimate blanket requirement on physical Einstein hyperbolicity. In particular, BR45's old conditional e and coefficient-growth inequality are not silently promoted to arbitrary ADM shift. Its source identities remain correct; its old energy positivity gate must be replaced by the actual normal-frame multiplier and real coefficient/connection estimates.
+
+New `scripts/check_hopf369_br73_adm_normal_energy.py` derives the exact block and Schur identities, negative control and all 15/5 channel sums. Native `originalADMNormalTime`, `originalADMNormalSpatialPower`, `originalADMNormalEnergy`, `originalADMCoordinateEnergy`, `originalADMShiftCorrection` and `OriginalADMNormalEnergyWeld` retain the original ADM source, with an explicit required algebra equality certificate, not an unproven complex-ring positivity assertion. **The variable-coefficient divergence-energy *current* for the new normal multiplier, including its physical boundary terms, is still analytically outstanding.**
+
+### BR74–75 — full nonlinear moving-graph Codazzi AND Gauss, actual 4D geometry
+
+For **flat ambient Minkowski**, the genuinely moving non-linear wall n=f(t,x,y,z), positive physical normal z=1+eta^{ab}f_a f_b, has
+```
+h_ab=eta_ab+f_a f_b,
+(h^-1)^ab=eta^ab-(f^a f^b)/z,
+K_ab=-f_ab/sqrt(z),
+Gamma(h)^c_ab=f^c f_ab/z.
+```
+Writing H_ab=f_ab and T_abc=f_abc, the full *curved intrinsic* Codazzi tensor `∇c K_ab-∇a K_cb` vanishes exactly: its numerator combines -z(T_cab-T_acb) with six explicit signed H*raised(H*f) terms which cancel by symmetric second/third graph jets. This is not merely BR62's constant-coefficient rank-four Fourier symbol: it is the **nonlinear connection-level identity** retaining every 4D graph derivative, including time. `scripts/check_hopf369_br74_nonlinear_graph_codazzi.py` has an independent moving polynomial graph/covariant-connection test and 64-index arbitrary jet cancellation; zero/null tangential frequency is not divided.
+
+The companion full nonlinear Gauss source is the complete 256-index intrinsic curvature tensor
+```
+R(h)_abcd = (H_ac H_bd-H_ad H_bc)/z
+          = K_ac K_bd-K_ad K_bc,
+R(h)= (tr_h K)²-K_ab K^ab.
+```
+The independent checker differentiates the ACTUAL induced `Gamma(h)` for a nontrivial moving source, separately from computing the algebraic Gauss RHS; it retains the Lorentzian four-wall signature, full 4x4 symmetric K, scalar and all components. Source `scripts/check_hopf369_br75_nonlinear_graph_gauss.py`. Native `OriginalNonlinearWallGraphJets`, `originalGraphHessianContraction`, `originalGraphCodazziNumerator`, `originalGraphGaussNumerator`, `OriginalGraphCurvatureSourcePayment` expose these complete objects.
+
+**Crucial physical scope**: the above identities with zero Codazzi source and purely K×K Gauss source hold for flat *ambient* geometry. For the actual warped AdS5/varying Einstein metric, the ambient normal Ricci and tangential Riemann/Weyl terms are **not zero**. They remain explicit sources in the native record and must be connected to BR55 and BR29; these tests do NOT solve curved Einstein Bianchi propagation.
+
+### BR76–77 — the TRUE moving-wall normal-frame stress flux, sharp tilt payment
+
+With the same original physical ADM metric, future unit timelike slice normal `t^mu=(∂t-v^i∂i)/N`, physical material unit spacelike wall normal `s^mu=g^{mu nu}F_nu/sqrt(z)`, and scalar gradient u, use the actual principal stress
+```
+T_mu nu=u_mu u_nu -g_mu nu (g^-1(du,du))/2.
+Flux=T(t,s)=(t.du)(s.du)-g(t,s)g^-1(du,du)/2.
+```
+At the compatible fixed Gaussian wall, g(t,s)=0 and this reduces to the familiar normal-velocity × material-conormal work. **At a general moving/shifted wall, g(t,s)!=0**; dropping the trace/tilt term is not justified by the BR41 signed reference work. Source `scripts/check_hopf369_br76_adm_moving_energy_flux.py` independently contracts all 25 stress entries, checks the source time and wall normals, preserves the exact BR49 densitized material conormal, and sums all 15 metric/5 gauge principal channels.
+
+There is a useful *sharp* positive flux bound without a frequency inverse or an artificial ADM shift restriction. Write `chi=g(t,s)`, and decompose `s=-chi t+r` with `r` slice-spatial and `|r|²=1+chi²`. For physical normal energy `E=(alpha²+|beta|²)/2`, alpha=t.du, beta the physical spatial gradient:
+```
+Flux= -chi E + alpha (r·beta),
+|Flux| <= (|chi|+sqrt(1+chi²)) E.
+```
+This follows by ordinary REAL/Hermitian Cauchy–Schwarz and Young, with exact 4-spatial wedge/sum-of-squares certificates. The coefficient is SHARP: alpha=1, beta aligned against r, equal magnitude, saturates. The actual source geometric `chi=(t.F)/sqrt(z)` can grow as the physical material normal becomes null (z→0+), so a uniform continuation estimate requires a genuine **spacelike wall gap** and controlled graph tilt, not merely N,H>0. New `scripts/check_hopf369_br77_wall_flux_coercivity.py` checks exact rational hyperbolic tilt strata, 15/5 channels, sharp saturation and a negative control showing the fixed-wall coefficient 1 fails at nonzero tilt. Native `OriginalPhysicalEnergyFrames`, `originalPhysicalStressFlux`, `OriginalSharpMovingFluxPayment` preserve the full signed flux, geometric tilt and the STILL UNPAID physical Israel/connection/boundary trace terms.
+
+**Important non-promotion:** an upper bound on the principal energy flux is NOT a maximally dissipative Einstein–Israel boundary condition or a Kreiss–Lopatinski estimate. The actual 15+5 first-order Einstein/gauge connection, BR71/72 physical D/E boundary rows, and BR29 nine zero-speed Weyl sector must supply the appropriate energy-controlled boundary source and constraint estimate.
+
+### BR78 — original nonlinear vacuum Einstein–Israel tension Ward obstruction
+
+Use the physical two-face matched induced metric h and Israel junction with wall stress `S_ab`:
+```
+I_ab=[K_ab]-h_ab tr_h[K]+3j h_ab-S_ab.
+D^a I_ab = [Ric_g(n,e_b)] +3 D_b j-D^a S_ab
+```
+(up to the source's fixed K/normal sign convention, which must be consistent with BR59/61). For actual **vacuum Einstein** bulk on both sides `Ric=-4g`, and physical unit normal orthogonal to the induced tangent, `Ric(n,e_b)=0`. If also `I=0` and S=0, the resulting Ward equality forces `D_b j=0` for **all four wall directions**. Therefore the independently time-varying j(t) coefficients in BR67/69 are valid algebraic *negative-control/source jets* but **not arbitrary physical vacuum-wall solution data**. A changing tension must be supplied with compensating wall matter `D^a S_ab=3D_b j` or normal bulk matter/Ricci flux. Do not close the nonlinear Bianchi theorem by setting those sources to zero.
+
+This is a much sharper restriction on the genuinely allowed geometry and source. `scripts/check_hopf369_br78_tension_bianchi_ward.py` distinguishes the divergence of the FULL physical Israel tensor from BR62's trace-reversed extrinsic 4×10 Codazzi symbol, checks the compensating symmetric source and preserves a nonconstant pure-tension vacuum refusal. Native `OriginalVacuumWallWardSource`, `originalWallWardDefect`, `OriginalPhysicalEinsteinIsraelWardCertificate` require the actual curved Codazzi source and all four Ward channels.
+
+### New consolidated exact critical path
+
+**P0 boundary geometry/gauge:** BR65–72 constructed the original D/E 30+10 physical reference rows and eighth-order jets. BR74–75 add the actual nonlinear intrinsic Gauss/Codazzi source. Still construct and prove **full curved** Fréchet coordinate ↔ physical normal-frame BR70 harmonic/Gauss/Codazzi graph correspondence on the exact same evolving Einstein metric, including curved ambient Ricci/Weyl and BR78 physical tension matter Ward.
+
+**P0 positive energy:** Replace BR45's coordinate-C positivity dependency with the BR73 actual slice-normal positive energy, derive its **full variable-coefficient multiplier current** and compatible moving material wall flux (BR76/77), then prove boundary trace/tame estimate on BR71/72 physical D/E with BR37 Q⁴/Q² glancing and original normal differentiated BR43 currency. Do not assume that positive energy alone gives a uniform boundary estimate.
+
+**P0 subsidiary:** Show the actual BR78 nonlinear Codazzi/normal Gauss Ward sources factor through the *same-solution* curved contracted Bianchi (BR55) and BR29 projected 35D wall, preserving its nine zero-speed modes and the rank12 wall-only Gram obstruction. The zero-frequency source can be nonzero if j varies without wall stress, and it must not be discarded.
+
+**P0 reconstruction & continuation:** BS13/BR57 gives a normal electric/shear inverse with original holonomy. Still need tangential/global weighted quotient/gauge, BR31 reflecting AdS exterior and a constructive actual continuous nonlinear PDE iteration/restart preserving positive normal lapse and material spacelike graph tilt gap.
+
+**Acceptance**: BR73–78 scripts and native carriers are COMMITTED, checkers under the existing source-SHA checkpointed `scripts/run_hopf369_br39_42_bounded.py --part frontier` with individual <=90s stages. All are CONSTRUCTED_PENDING_LOCAL_SYMPY_AND_AGDA_KERNEL; tests remain deferred; GitHub CI not used. None of these physical algebra and differential-geometry constructions is the proved full continuum Einstein–Israel theorem.
