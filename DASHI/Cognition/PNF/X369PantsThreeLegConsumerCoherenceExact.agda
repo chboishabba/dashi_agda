@@ -78,7 +78,7 @@ module ThreeSourceLegs
   reopenAll : OriginalLegs → A × (B × C)
   reopenAll t = firstSource t , (secondSource t , thirdSource t)
 
-  tripleBidi : reopenAll packet ≡ a , (b , c)
+  tripleBidi : reopenAll packet ≡ (a , (b , c))
   tripleBidi = refl
 
   leftProvenanceBidi : firstProvenance packet ≡ sourceA
