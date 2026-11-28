@@ -1,0 +1,290 @@
+{
+  "schema": "engineered-gravity-proof-dag-v1",
+  "authority": "A listed owner is a constructor, not a proof or physical source receipt",
+  "stages": [
+    "S0_source",
+    "S1_constraints",
+    "S2_interface",
+    "S3_evolution",
+    "S4_receiver",
+    "S5_certification"
+  ],
+  "lanes": {
+    "A_shielding": {
+      "owner": [
+        "scripts/check_kk_same_action_stress.py",
+        "scripts/check_engineered_gravity_reciprocal_action_shell.py",
+        "scripts/check_engineered_gravity_nonlinear_shell.py"
+      ],
+      "unpaid": [
+        "physical material susceptibility and conserved stress",
+        "Earth source scalar/tensor junction",
+        "neutral clock/tide versus support and EM pickup"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "B_bulk": {
+      "owner": [
+        "scripts/check_engineered_gravity_hopf_axial_trajectory.py",
+        "scripts/check_engineered_gravity_g3_harmonic_receiver.py"
+      ],
+      "unpaid": [
+        "original full spacetime same-event null path",
+        "constraint-compatible physical causal boundary",
+        "converged receiver with source backreaction"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "C_radion": {
+      "owner": [
+        "scripts/check_kk_casimir_bidi_consumer.py",
+        "scripts/check_kk_radion_spherical_match.py",
+        "scripts/check_engineered_gravity_source_receiver_inverse.py"
+      ],
+      "unpaid": [
+        "physical complete KK action and stabilized source",
+        "curved matched Earth/material configuration",
+        "fifth-force and clock/tide physical budgets"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "D_active_stress_TOV": {
+      "owner": [
+        "scripts/check_engineered_gravity_tov_material.py",
+        "scripts/check_tov_covariant_matter_hessian.py",
+        "scripts/check_tov_polar_ritz_search.py",
+        "scripts/check_tov_second_israel_shape.py",
+        "scripts/check_tov_two_face_canonical_second.py"
+      ],
+      "unpaid": [
+        "second-order bulk Einstein Cauchy source and solution",
+        "GHY/corner and moving graph-domain Hessian",
+        "full free-metric nonlinear branch and physical receiver"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "E_coherent_OCT369": {
+      "owner": [
+        "scripts/check_oct369_p024_dynamic_controller_ward.py",
+        "scripts/check_engineered_gravity_shell_compliance.py"
+      ],
+      "unpaid": [
+        "same-state microscopic Hamiltonian/current/stress",
+        "Maxwell-metric-controller joint evolution",
+        "calibrated independent gravity discriminator"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "F_EM_GW": {
+      "owner": [
+        "scripts/check_f8_quadratic_einstein.py",
+        "scripts/check_f8_full_pair_source.py"
+      ],
+      "unpaid": [
+        "original Maxwell/material source work and support",
+        "fully retarded sourced Einstein metric",
+        "static vs radiative neutral receiver"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "G_warp_junction": {
+      "owner": [
+        "scripts/check_f8_gauss_israel_energy_weld.py",
+        "scripts/check_f8_two_level_israel_trace_closure.py",
+        "scripts/check_tov_two_face_canonical_second.py"
+      ],
+      "unpaid": [
+        "same-object physical moving source/geometry",
+        "uniform curved differentiated boundary/glancing estimate",
+        "global exterior observer and energy conditions"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "H_lift": {
+      "owner": [
+        "scripts/check_engineered_gravity_source_receiver_inverse.py",
+        "scripts/check_engineered_gravity_l4_budget.py"
+      ],
+      "unpaid": [
+        "actual apparatus EM work/reaction",
+        "independent neutral free-fall/clock/tide",
+        "measured source/calibration uncertainty"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "I_hybrid": {
+      "owner": [
+        "scripts/check_engineered_gravity_shell_ward_hessian.py",
+        "scripts/check_engineered_gravity_shell_compliance.py",
+        "scripts/check_kk_same_action_stress.py"
+      ],
+      "unpaid": [
+        "physical same-source orientation/support",
+        "a posteriori continuum branch bound",
+        "Einstein observer and total work ledger"
+      ],
+      "unpaid_stages": [
+        "S0_source",
+        "S1_constraints",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "J_F8": {
+      "owner": [
+        "scripts/run_f8_p0_integrated_local.py",
+        "scripts/check_f8_p0_original_same_clock_state.py",
+        "scripts/check_f8_quadratic_einstein.py"
+      ],
+      "unpaid": [
+        "original source-hash-pinned native same-time capture",
+        "full scalar/vector/TT Israel constrained response",
+        "96 signed receiver and causal-null continuum"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "G3_vacuum": {
+      "owner": [
+        "scripts/check_engineered_gravity_g3_harmonic.py",
+        "scripts/check_engineered_gravity_g3_harmonic_receiver.py"
+      ],
+      "unpaid": [
+        "physical subsidiary constraints and boundary",
+        "same-event invariant matched observer",
+        "PDE continuation/convergence"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    },
+    "G4_Einstein_RMHD": {
+      "owner": [
+        "scripts/check_engineered_gravity_g3_harmonic.py",
+        "scripts/check_f8_material_momentum_frame_weld.py"
+      ],
+      "unpaid": [
+        "York physical matter initial data",
+        "nonlinear coupled Einstein-RMHD energy/entropy",
+        "matched source-receiver convergence"
+      ],
+      "unpaid_stages": [
+        "S1_constraints",
+        "S2_interface",
+        "S3_evolution",
+        "S4_receiver",
+        "S5_certification"
+      ],
+      "constructed": "Existing selected finite/source geometry; details in controlling roadmap"
+    }
+  },
+  "donor_prs": {
+    "1291": "indexed hyperfabric",
+    "1527": "F8 nonlinear source",
+    "1537": "common field/source boundary",
+    "1554": "BR230/232 G4 primitive, BR263-267 boundary, BR268-276 Maxwell/ADM",
+    "1555": "signed solar-vortex MHD"
+  },
+  "cross_lane_shared_welds": {
+    "ward_source": [
+      "A_shielding",
+      "C_radion",
+      "E_coherent_OCT369",
+      "F_EM_GW",
+      "I_hybrid"
+    ],
+    "constrained_Einstein": [
+      "B_bulk",
+      "D_active_stress_TOV",
+      "G_warp_junction",
+      "J_F8",
+      "G3_vacuum",
+      "G4_Einstein_RMHD"
+    ],
+    "moving_two_face": [
+      "D_active_stress_TOV",
+      "G_warp_junction",
+      "J_F8"
+    ],
+    "same_event_receiver": [
+      "A_shielding",
+      "B_bulk",
+      "C_radion",
+      "D_active_stress_TOV",
+      "E_coherent_OCT369",
+      "F_EM_GW",
+      "G_warp_junction",
+      "H_lift",
+      "I_hybrid",
+      "J_F8",
+      "G3_vacuum",
+      "G4_Einstein_RMHD"
+    ]
+  }
+}
