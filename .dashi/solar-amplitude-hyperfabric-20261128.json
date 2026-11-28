@@ -1,0 +1,65 @@
+{
+  "scope": "finite quadratic amplitude event; original event body source-copy, not full native dependency graph",
+  "date": "2026-11-28",
+  "hyperfabric_donor": {
+    "pr": 1291,
+    "head": "c68b44f37c89b54d9ba0b5ef18ab4753c7dd5f04",
+    "owner": "DASHI/Codec/IndexedCubeHyperfibreExact.agda",
+    "blob": "ce42b07fbaf430685ce172895cc482f933073577",
+    "cross_index_commutation_claim": false
+  },
+  "local_execution": {
+    "sympy": "1.14.0",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "exact_cases": 4,
+    "exact_status": "PASS",
+    "event_cases": 4,
+    "event_status": "PASS",
+    "higher_order_support": "PASS",
+    "event_relative_errors": [
+      [
+        0,
+        1.8279903173251435e-16,
+        1.938862142654452e-16
+      ],
+      [
+        1.4082145321529474e-16,
+        1.621438396079784e-16,
+        9.873276711775e-17
+      ],
+      [
+        0.0011972058649991574,
+        0.00011972065372824733,
+        0.000011970538240433545
+      ],
+      [
+        0.000029518964543944096,
+        0.0000029489776397405956,
+        2.94868356799727e-7
+      ]
+    ],
+    "amplitude_scales": [
+      0.01,
+      0.001,
+      0.0001
+    ],
+    "executed_blobs": {
+      "scripts/solar_population_amplitude_event.py": "650168241e31de60d0e320ef8ac8d0607c77e95c",
+      "scripts/check_solar_amplitude_event.py": "3e0180bd5e7231c5fed8a1e794844432d0fdf831",
+      "scripts/check_solar_amplitude_path_sympy.py": "282965e0071d57a688fafca64e9c48320bda1005"
+    },
+    "event_dependency": "source-copy of event and MASS/CHARGE definitions from original solar_physical_causal.py, full module not imported"
+  },
+  "pending": [
+    "native 24-cell quadratic path fixture",
+    "native legacy/common atlas/cached material fixtures",
+    "cross-step causal reach",
+    "second-order field/work tangent in quadratic chart",
+    "strict restored global passive comparison",
+    "independent physical source/continuum"
+  ],
+  "physical_admission": false,
+  "ci": false,
+  "kernel": false
+}
