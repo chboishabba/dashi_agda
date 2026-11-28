@@ -169,3 +169,81 @@ module Carrier {Value : Set}
       congApply : ∀ {x y : Code} → x ≡ y → (z : State) →
         apply x z ≡ apply y z
       congApply refl z = refl
+
+  -- Admitted ten literal/guard actions, independently recoverable by
+  -- applying the original two-register endpoint to six basis columns.
+  -- The signed entries are DATA, not a target-label oracle in execution.
+  f0 : Fin 6
+  f0 = zero
+  f1 : Fin 6
+  f1 = suc f0
+  f2 : Fin 6
+  f2 = suc f1
+  f3 : Fin 6
+  f3 = suc f2
+  f4 : Fin 6
+  f4 = suc f3
+  f5 : Fin 6
+  f5 = suc f4
+
+  allPositive : Six Bool
+  allPositive = six false false false false false false
+
+  translation : Code
+  translation = code (six f2 f0 f1 f5 f3 f4) allPositive
+
+  translation² : Code
+  translation² = then translation translation
+
+  reflection : Code
+  reflection = code (six f0 f2 f1 f3 f5 f4)
+    (six false false false true true true)
+
+  negation : Code
+  negation = code (six f0 f1 f2 f3 f4 f5)
+    (six true true true true true true)
+
+  data Literal : Set where
+    a0 a1 a2 b0 b1 b2 j0 j1 n0 n1 : Literal
+
+  literal : Literal → Code
+  literal a0 = identity
+  literal a1 = translation
+  literal a2 = translation²
+  literal b0 = identity
+  literal b1 = translation
+  literal b2 = translation²
+  literal j0 = identity
+  literal j1 = reflection
+  literal n0 = identity
+  literal n1 = negation
+
+  inverseLiteral : Literal → Literal
+  inverseLiteral a0 = a0
+  inverseLiteral a1 = a2
+  inverseLiteral a2 = a1
+  inverseLiteral b0 = b0
+  inverseLiteral b1 = b2
+  inverseLiteral b2 = b1
+  inverseLiteral j0 = j0
+  inverseLiteral j1 = j1
+  inverseLiteral n0 = n0
+  inverseLiteral n1 = n1
+
+  inverseReceipt : (u : Literal) →
+    InverseReceipt (literal u) (literal (inverseLiteral u))
+  inverseReceipt a0 = record { left = refl ; right = refl }
+  inverseReceipt a1 = record { left = refl ; right = refl }
+  inverseReceipt a2 = record { left = refl ; right = refl }
+  inverseReceipt b0 = record { left = refl ; right = refl }
+  inverseReceipt b1 = record { left = refl ; right = refl }
+  inverseReceipt b2 = record { left = refl ; right = refl }
+  inverseReceipt j0 = record { left = refl ; right = refl }
+  inverseReceipt j1 = record { left = refl ; right = refl }
+  inverseReceipt n0 = record { left = refl ; right = refl }
+  inverseReceipt n1 = record { left = refl ; right = refl }
+
+  literalRoundtrip : (u : Literal) (z : State) →
+    apply (literal (inverseLiteral u)) (apply (literal u) z) ≡ z
+  literalRoundtrip u z = useInverseLeft
+    (literal u) (literal (inverseLiteral u)) (inverseReceipt u) z
