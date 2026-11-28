@@ -16,12 +16,13 @@ module DASHI.Physics.YangMills.YMClayCMP102OriginalGeometricSqueezeReceiverExact
 
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (_/_)
+open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ)
 import Real as R
 import RealProperties as P
 import Sequence as Seq
 
 import DASHI.Analysis.BishopSetoidSqueezeConvergenceExact as Squeeze
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Physics.YangMills.YMClayCMP102OriginalGFiniteLimitTransportExact as Original
 
@@ -77,3 +78,57 @@ originalGZeroFromOriginalGeometricBracket
     X inside
     (originalGPrefixZeroFromOriginalGeometricBracket
       X rateZero lower upper)
+
+-- The original Bishop quarter radius is positive and strictly below one.
+quarterNonnegative : R.NonNegative Half.bishopQuarter
+quarterNonnegative =
+  P.0≤x⇒nonNegx (P.<⇒≤ Machin.quarterPositive)
+
+quarterAbsBelowOne :
+  R._<_ (R.∣ Half.bishopQuarter ∣) R.1ℝ
+quarterAbsBelowOne =
+  P.<-respˡ-≃
+    (P.≃-symm (P.nonNegx⇒∣x∣≃x quarterNonnegative))
+    Machin.quarterBelowOne
+
+-- Existing Bishop geometric-power vanishing and sequence multiplication
+-- supply the ACTUAL 3*quarter^count limit, not an assumed rate.
+originalGeometricRateZero :
+  Seq._ConvergesTo_ originalGeometricRate R.0ℝ
+originalGeometricRateZero =
+  Seq.xₙ→x∧x≃y⇒xₙ→y
+    (Seq.xₙyₙ→x₀y₀
+      (three , Original.constantConverges three)
+      (R.0ℝ , Seq.∣r∣<1⇒rⁿ→0 quarterAbsBelowOne))
+    (let open P.ℝ-Solver
+     in solve 1
+          (λ c → c ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+          P.≃-refl three)
+
+-- Just the ORIGINAL finite two-sided majorant remains. No analytic
+-- convergence premise, external algebra model or G=0 assumption.
+originalGPrefixZeroFromFiniteBracket :
+  ∀ X →
+  (∀ count →
+    R._≤_ (R.- (originalGeometricRate count))
+      (Original.originalGPrefix X count)) →
+  (∀ count →
+    R._≤_ (Original.originalGPrefix X count)
+      (originalGeometricRate count)) →
+  Seq._ConvergesTo_ (Original.originalGPrefix X) R.0ℝ
+originalGPrefixZeroFromFiniteBracket X lower upper =
+  originalGPrefixZeroFromOriginalGeometricBracket
+    X originalGeometricRateZero lower upper
+
+originalGZeroFromFiniteBracket :
+  ∀ X (inside : R._≤_ (R.∣ X ∣) Half.bishopQuarter) →
+  (∀ count →
+    R._≤_ (R.- (originalGeometricRate count))
+      (Original.originalGPrefix X count)) →
+  (∀ count →
+    R._≤_ (Original.originalGPrefix X count)
+      (originalGeometricRate count)) →
+  R._≃_ (Original.originalG X inside) R.0ℝ
+originalGZeroFromFiniteBracket X inside lower upper =
+  originalGZeroFromOriginalGeometricBracket
+    X inside originalGeometricRateZero lower upper
