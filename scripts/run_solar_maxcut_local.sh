@@ -33,6 +33,12 @@ for entry in \
   check_solar_nested_cochain_refinement.py \
   check_solar_evolution_tail.py \
   check_solar_sparse_cone.py \
+  check_solar_jet_error.py \
+  check_solar_event_rounding.py \
+  check_solar_native_assembly.py \
+  check_solar_native_nested_assembly.py \
+  check_solar_native_forward.py \
+  check_solar_native_nonfrozen_binary.py \
   check_squared_restoration_sympy.py \
   check_frozen_population_identity.py \
   check_solar_material_cache_parity.py \
