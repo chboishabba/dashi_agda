@@ -137,7 +137,7 @@ def leech_binary():
     rows=[bits(g[i,:]) for i in range(24)]
     diag=bits([g[i,i]//2 for i in range(24)])
     def bil(x,y):
-        return parity(sum((rows[i]&y).bit_count() for i in range(24) if x>>i&1))
+        return sum((rows[i]&y).bit_count() for i in range(24) if x>>i&1)%2
     def q(x):
         inds=[i for i in range(24) if x>>i&1]
         return (parity(x&diag)+sum(int(g[i,j]) for i in inds for j in inds if j<i))%2
