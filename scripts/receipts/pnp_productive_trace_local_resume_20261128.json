@@ -1,0 +1,215 @@
+{
+  "date": "2026-11-28",
+  "scope": "Local Python execution of connector-transcribed actual function bodies in a combined module; names/imports adapted, not a full checkout or kernel run. Aggregate gate compiler uses a transcription of the repository optimized_clauses/eval_circuit donor. Committed campaign imports actual repository modules; that exact full-checkout campaign was not run.",
+  "source_entry": "e06ddd01837c88e335e88b9b682ea456de2d0c7f",
+  "mass_fix": "5e282b62d54dd1d9e7ad321c20bde88edbf550bf",
+  "aggregate_compiler": "e7c5d93d0fceff010f6f91c0f9fd0dae704f646f",
+  "portfolio": "e96e26119c114aa1ae3fb78ed3bdd901077e9636",
+  "campaign": "36d4b662770db3104be7669daf612ae3a2b8e455",
+  "timeout_seconds": 90,
+  "checkpoint_policy": "Independent seed per original case index, atomic JSON after every case, subsequent invocations resume next index. Baseline eight batches of 128; final sixteen batches of 64; compiler four batches of 128.",
+  "local_source_sha256": {
+    "geometry": "6e025ba441caf67f331445065e4e0b76177dc613d4c0fd91adff38dcdffe7819",
+    "aggregate": "d72857fd7b4fe808f20547ed929976602386cad78e9ddc88d2e536f169a065a3",
+    "campaign": "39255d3f9dabc5e80190a2d3a198d1d0419bc127e7a7957cda1bc09d716bbe56",
+    "compiler_campaign": "c7787298de705a6a77d67081868f036f87acd30a5a587019940798ba38b0d143"
+  },
+  "mass_counterexample": {
+    "n": 3,
+    "rows": [
+      1
+    ],
+    "demand": [
+      [
+        1,
+        1
+      ]
+    ],
+    "caps": [
+      1
+    ],
+    "before": 1,
+    "after": 4
+  },
+  "baseline": {
+    "next": 1024,
+    "counts": {
+      "mass": 1024,
+      "mass_free": 604,
+      "partial_sat": 494,
+      "partial_empty": 520,
+      "partial_unknown": 10,
+      "collective_sat": 494,
+      "collective_empty": 530,
+      "collective_unknown": 0,
+      "portfolio_SAT": 347,
+      "portfolio_IMPROVED": 341,
+      "portfolio_MINIMUM": 114,
+      "portfolio_UNKNOWN": 222,
+      "basis_stall": 87,
+      "basis_stall_improved": 86,
+      "demand_lane": 308,
+      "demand_improved": 86,
+      "collective_lane": 22,
+      "partial_lane": 103,
+      "unknown_inhabited": 0
+    }
+  },
+  "uncapped_attempt": {
+    "status": "TIMEOUT",
+    "checkpoint_next": 58,
+    "reason": "Large lifted queries expensive despite logical allowance. Restarted under aggregate_cap=8192; changed algorithm requires fresh checkpoint."
+  },
+  "final": {
+    "next": 1024,
+    "counts": {
+      "mass": 1024,
+      "mass_free": 604,
+      "partial_sat": 494,
+      "partial_empty": 520,
+      "partial_unknown": 10,
+      "collective_sat": 494,
+      "collective_empty": 530,
+      "collective_unknown": 0,
+      "portfolio_SAT": 347,
+      "portfolio_IMPROVED": 342,
+      "portfolio_MINIMUM": 165,
+      "portfolio_UNKNOWN": 170,
+      "basis_stall": 87,
+      "basis_stall_improved": 87,
+      "demand_lane": 308,
+      "demand_improved": 87,
+      "collective_lane": 76,
+      "partial_lane": 150,
+      "unknown_inhabited": 0
+    }
+  },
+  "stall479": {
+    "n": 10,
+    "rows": [
+      917,
+      92,
+      474,
+      252,
+      839,
+      223
+    ],
+    "demand": [
+      [
+        531,
+        1
+      ],
+      [
+        261,
+        0
+      ],
+      [
+        131,
+        0
+      ],
+      [
+        81,
+        0
+      ],
+      [
+        35,
+        0
+      ],
+      [
+        13,
+        1
+      ]
+    ],
+    "caps": [
+      2,
+      0,
+      1,
+      0,
+      3,
+      3
+    ],
+    "start": 88,
+    "hard_flats": [
+      [
+        [
+          128,
+          1
+        ],
+        [
+          16,
+          1
+        ]
+      ],
+      [
+        [
+          8,
+          0
+        ],
+        [
+          128,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        [
+          64,
+          1
+        ]
+      ],
+      [
+        [
+          64,
+          0
+        ],
+        [
+          8,
+          1
+        ]
+      ]
+    ],
+    "initial": 8,
+    "global_minimum": 3,
+    "best_rowwise": 8,
+    "global_minimizer": 772,
+    "hard_points": 4,
+    "final_portfolio": "IMPROVED",
+    "semantics": "explicit atomic macro"
+  },
+  "compiler": {
+    "next": 512,
+    "cases": 512,
+    "points": 16320,
+    "accepted": 7260,
+    "gate_flips": 94996,
+    "small_all_aux": 54352,
+    "max_gates": 288,
+    "controls": [
+      {
+        "lifted_arity": 14,
+        "flats": 29,
+        "truth": true,
+        "partial": "UNKNOWN",
+        "collective": "SAT",
+        "lifted_witness": 8208
+      },
+      {
+        "lifted_arity": 18,
+        "flats": 44,
+        "truth": false,
+        "partial": "UNKNOWN",
+        "collective": "EMPTY"
+      }
+    ]
+  },
+  "unrun": [
+    "full repository checkout campaign",
+    "recover_trace capacity partition complete integration",
+    "Agda and Lean kernels"
+  ],
+  "ci_actions_requested": false,
+  "commit_messages_include_skip_ci": true
+}
