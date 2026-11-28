@@ -26,6 +26,19 @@ def audit(m,repo=None):
                       "unpaid_stages":spec["unpaid_stages"],"owners":owners}
     for label,p in m["cross_lane_shared_welds"].items():
         assert len(set(p))==len(p) and len(p)>1 and set(p)<=set(LANES),label
+    for label,w in m.get("w1_source_boundary_welds",{}).items():
+        assert w["lanes"] and len(set(w["lanes"]))==len(w["lanes"]) and set(w["lanes"])<=set(LANES),label
+        assert w["source_owner"].startswith("scripts/") and w["source_owner"].endswith(".py"),label
+        assert w["checker"].startswith("scripts/") and w["checker"].endswith(".py"),label
+        assert w["scope"] and w["source_equation"],label
+        assert w["physical_paid"] is False,label
+        if "external_checker_pr" in w:assert int(w["external_checker_pr"])>0
+        if repo is not None:
+            for key in ("source_owner","checker"):
+                if key=="checker" and "external_checker_pr" in w:continue
+                # A donor may be absent on this PR; don't silently pay it.
+                if not (repo/w[key]).is_file():
+                    results[w["lanes"][0]].setdefault("missing_w1_sources",[]).append(w[key])
     return results
 
 def main():
