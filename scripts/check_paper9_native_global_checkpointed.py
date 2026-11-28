@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local staged Paper 9 kernel replay. Never turns a diagnostic into proof.
+"""Local staged Paper 9 kernel replay through the repository-approved wrapper. Never turns a diagnostic into proof.
 Run in the pinned Agda environment from a clean committed checkout.
 Each successful stage is recorded atomically; a failed/timeout stage is retried.
 The strict --safe lane is separate from the diagnostic lane.
@@ -141,7 +141,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--checkpoint", type=Path, required=True)
     ap.add_argument("--budget", type=float, default=80)
-    ap.add_argument("--agda", default="agda")
+    ap.add_argument("--wrapper", default="scripts/run_agda29_parallel_check.sh",
+                    help="repository-approved Agda entrypoint")
     ap.add_argument("--include", action="append", default=[])
     ap.add_argument("--audit-only", action="store_true")
     ap.add_argument("--diagnostic-unsafe", action="store_true",
@@ -150,7 +151,18 @@ def main():
     if not 0 < args.budget <= 85:
         ap.error("budget must be in (0,85], use external timeout 90s")
     start = time.monotonic()
-    audit = source_audit(args.include)
+    env = os.environ.copy()
+    audit_roots = list(args.include)
+    for key in ("AGDA_STDLIB_SRC_29", "AGDA_STDLIB_SRC"):
+        if env.get(key):
+            audit_roots.append(env[key])
+    cache_root = Path(env.get("DASHI_AGDA29_CACHE_ROOT",
+        Path(env.get("XDG_CACHE_HOME", Path.home()/".cache"))/"dashi-agda29"))
+    cached_stdlib = cache_root/"agda-stdlib-experimental"/"src"
+    if cached_stdlib.is_dir():
+        audit_roots.append(str(cached_stdlib))
+    args.include = [str(Path(p).resolve()) for p in args.include]
+    audit = source_audit(audit_roots)
     audit_path = args.checkpoint.with_suffix(".audit.json")
     atomic_json(audit_path, audit)
     print("SOURCE_AUDIT", len(audit["sources"]), "files;",
@@ -159,25 +171,49 @@ def main():
     if args.audit_only:
         print("AUDIT_ONLY: no kernel acceptance", flush=True)
         return 0
-    executable = shutil.which(args.agda)
-    if not executable:
-        print("BLOCKED: Agda executable absent; no acceptance", flush=True)
+    wrapper = ROOT/args.wrapper
+    if not wrapper.is_file():
+        print(f"BLOCKED: approved wrapper missing: {wrapper}; no acceptance", flush=True)
         return 2
     if git("status", "--porcelain", "--untracked-files=no"):
         raise RuntimeError("commit tracked changes before acceptance")
-    submodules = git("submodule", "status", "--recursive")
+    required_sources = [ROOT/"vendor/bishop", ROOT/"DCHoTT-Agda", ROOT/"cubical"]
+    missing = [str(p) for p in required_sources if not p.is_dir()]
+    if missing:
+        raise RuntimeError("required Agda source/submodule roots missing: " + ", ".join(missing))
+    submodules = git("submodule", "status", "vendor/bishop", "DCHoTT-Agda", "cubical")
     if any(line[:1] in "-+U" for line in submodules.splitlines()):
-        raise RuntimeError("submodule checkout missing or differs from pin")
-    version = subprocess.check_output([executable, "--version"], text=True, timeout=10).strip()
-    flags = ["-l", "dashi-agda"] + ([] if args.diagnostic_unsafe else ["--safe"])
-    for path in args.include:
-        flags.extend(["-i", str(Path(path).resolve())])
-    header = {"schema": 1, "head": git("rev-parse", "HEAD"),
+        raise RuntimeError("required Agda submodule checkout missing or differs from pin")
+    executable = env.get("AGDA_BIN")
+    if not executable:
+        nix = shutil.which("nix")
+        if not nix:
+            print("BLOCKED: AGDA_BIN unset and Nix unavailable to resolve the pinned Agda flake; no acceptance", flush=True)
+            return 2
+        flake = env.get("AGDA_FLAKE", "/home/c/Documents/code/agda#debug.bin")
+        out = subprocess.check_output([nix, "build", "--no-link", "--print-out-paths", flake],
+                                      text=True, timeout=35).strip().splitlines()
+        if not out:
+            raise RuntimeError("pinned Agda flake produced no output path")
+        executable = str(Path(out[-1])/"bin/agda")
+    executable_path = Path(executable).resolve()
+    if not executable_path.is_file():
+        raise RuntimeError(f"resolved Agda binary is missing: {executable_path}")
+    env["AGDA_BIN"] = str(executable_path)
+    version = subprocess.check_output([str(executable_path), "--version"],
+                                      text=True, timeout=10).strip()
+    flags = [] if args.diagnostic_unsafe else ["--safe"]
+    for include in args.include:
+        flags.extend(["-i", include])
+    header = {"schema": 2, "head": git("rev-parse", "HEAD"),
               "submodules": submodules, "agda": version,
-              "executable": str(Path(executable).resolve()),
-              "executable_sha256": digest(Path(executable).resolve()),
+              "executable": str(executable_path),
+              "executable_sha256": digest(executable_path),
+              "wrapper": str(wrapper.relative_to(ROOT)),
+              "wrapper_sha256": digest(wrapper),
               "flags": flags, "source_audit": audit,
-              "lane": "diagnostic" if args.diagnostic_unsafe else "strict-safe"}
+              "lane": "diagnostic" if args.diagnostic_unsafe else "strict-safe",
+              "entrypoint": "scripts/run_agda29_parallel_check.sh"}
     state = json.loads(args.checkpoint.read_text()) if args.checkpoint.exists() else {
         "header": header, "passed": {}, "attempts": []}
     if state.get("header") != header:
@@ -198,10 +234,10 @@ def main():
             print("BUDGET: earlier receipts retained", flush=True)
             break
         log = logs/f"{i:02d}-{len(state['attempts']):04d}.log"
-        argv = [executable, *flags, stage]
+        argv = ["bash", str(wrapper), *flags, stage]
         print("RUN", *argv, flush=True)
         with log.open("wb") as out:
-            proc = subprocess.Popen(argv, cwd=ROOT, stdout=out,
+            proc = subprocess.Popen(argv, cwd=ROOT, env=env, stdout=out,
                                     stderr=subprocess.STDOUT, start_new_session=True)
             try:
                 rc = proc.wait(timeout=remaining)
