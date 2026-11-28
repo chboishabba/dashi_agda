@@ -3,7 +3,6 @@ Exact normalized construction, causal transport and admission tests.
 The inverse realizes a labelled port law, NOT a measured material.
 """
 import sympy as S
-from itertools import product
 
 def circle_reduce(f,x,y):
     return S.rem(S.expand(f),x*x+y*y-1,x)
@@ -15,6 +14,9 @@ def harmonic_inverse(a):
         # Reuse actual local force Fourier coefficients, not a modal proxy.
         f=(S.sqrt(2)*(r[2][0]*S.re(u**2)-r[2][1]*S.im(u**2))+
            (r[1][0]-r[1][1])*x-(r[1][0]+r[1][1])*y)
+        ref=(S.sqrt(2)*((r[2][0]+S.I*r[2][1])*u**2+
+             (1+S.I)/S.sqrt(2)*(r[1][0]+S.I*r[1][1])*u)).applyfunc(lambda v:S.expand(S.re(v)))
+        assert (f-ref).applyfunc(S.expand)==S.zeros(len(ids),1)
         store=S.expand(sum(v*(u**k if k>=0 else S.conjugate(u)**(-k)) for k,v in c.items()))
         assert circle_reduce(store-S.conjugate(store),x,y)==0
         # Polynomial lift on e=S*lambda. Monomial degree <=2 in beat,
@@ -36,7 +38,10 @@ def causal_face():
     h=S.Function('h')
     field=h(t-b)
     assert S.diff(field,t)+S.diff(field,b)==0
-    assert S.simplify(S.integrate(S.diff(field,t),(b,0,d))-(h(t)-h(t-d)))==0
+    # Explicit antiderivative in age b; fundamental theorem of calculus.
+    primitive=-field
+    assert S.diff(primitive,b)==S.diff(field,t)
+    assert primitive.subs(b,d)-primitive.subs(b,0)==h(t)-h(t-d)
     # Generic directed ledger, for arbitrary distinct launch/arrival.
     launch,arrive,localA,localB=S.symbols('launch arrive localA localB',real=True)
     assert S.expand((localA-launch)+(localB+arrive)+(launch-arrive)-localA-localB)==0
