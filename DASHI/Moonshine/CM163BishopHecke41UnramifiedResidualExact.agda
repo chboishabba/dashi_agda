@@ -47,7 +47,7 @@ contractConv f hf v (Seq.con* cv) = Seq.con* λ { (suc k) →
     P.≤-respˡ-≃
       (P.∣-∣-cong (P.+-cong (R41.prefixStride f hf n) P.≃-refl))
       (proj₂ (cv (suc k)) (suc (stride n))
-        (s≤s (NP.≤-trans past (NP.m≤m*n n 40)))) } }
+        (s≤s (NP.≤-trans past (NP.m≤m*n n 41)))) } }
 
 contractAbs : ∀ f → Sector f →
   Seq.SeriesOf_ConvergesAbsolutely f →
