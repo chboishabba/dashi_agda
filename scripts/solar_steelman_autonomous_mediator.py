@@ -166,4 +166,6 @@ def run(m=None):
     print('  sufficient total offset',float(sum(offsets)),'(not minimum or physical HF store)',flush=True)
     print('LIMIT shared ideal clock, constructed local effort couplings; no actual HF electromagnetic law, finite-speed or stability proof',flush=True)
 
+    return dict(models=models,parent=parent,order=order,flows=flows,data=data,local=local,means=means,rows=rows)
+
 if __name__=='__main__':run()
