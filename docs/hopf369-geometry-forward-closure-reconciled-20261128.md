@@ -6276,3 +6276,14 @@ Artifacts/hopf369/br225_229_local_receipt_20261128.txt.
 These checks are separate from original donor import and native
 acceptance. Five stages added to terminal runner. No continuum
 or empirical claim. All files remain committed with work.
+
+
+## 61. BR230/232/233 finite dynamic cut; BR231/234–236 remain open
+
+Source script scripts/check_hopf369_br230_233_dynamic_cut.py (commit f9505ecfea1b5eb03eeeabd557aff17949ed3871). Written, not executed in this turn. Run each part with timeout 90s; no CI. BR230 imports actual BR205/207 and curvature carrier, checks exact image split. In moving frames J(t)=U J0 V^-1 gives J'=A J-J B, hence adapted derivatives partial-A and partial-B intertwine J. This is an adapted-frame identity, not an actual nonlinear source or tame estimate. The common wall connection must be assembled from the BN geometry; differences to ambient connection remain forcing.
+
+BR232 uses BR227 stiff-EOS primitive inversion in a flat periodic conservative finite-volume comparator with constant normal B, physical stress and induction flux, speed-one Rusanov flux, per-step conservation and physical margin checks. Manufactured initial data, not P0H/York evolution. Next attach actual source and metric, verify admissibility via increments and relative energy; no general positivity claim.
+
+BR233 extends actual P0AG surface/assembly/current maps with positive prescribed cell-volume history, endpoint chemical potential, signed volume work and original Hodge midpoint work. Check amount conservation, patch charge, Gauss/divB, nonlinear residual and energy ledger. Hodge and volume histories are prescribed independently, not yet from a common Einstein metric. Next replace both with a same-state metric history.
+
+BR231 G3: actual reduced equation and harmonic subsidiary remain unpaid. BR234 atomic: marked parameter inverse and calibration remain. BR235 indexed histories: native arrows and chronology residuals remain. BR236 Monster: original marked action/projector inhabitants remain. Reuse section 60 donor owners. Metadata audit retrieved F8 #1547 4c41ea21b55c264d26b0edd2e93fbf45984ead54; #1291, #1217, #1545, #1536 unchanged from section 60. No exhaustive sibling/master code reconciliation in this cut. No claim of terminal runner registration or executed acceptance.
