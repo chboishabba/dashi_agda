@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BR39–78 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
+"""BR39–81 bounded local acceptance, no CI, no shell or OpenBLAS requirement.
 
 Each original checker is a separate <=90-second subprocess. Receipt identity
 includes *source digests*, Python version and argument vector. Failures/timeouts
@@ -7,7 +7,7 @@ are retained, never recorded as PASS. Completed matching cases are skipped.
 No script is executed merely by importing this module.
 
 Usage:
- python scripts/run_hopf369_br39_42_bounded.py --part frontier --output /tmp/hopf-receipts\n python scripts/run_hopf369_br39_42_bounded.py --part fast --output /tmp/hopf-receipts
+ python scripts/run_hopf369_br39_42_bounded.py --part frontier --output /tmp/hopf-receipts\n python scripts/run_hopf369_br39_42_bounded.py --part closure --output /tmp/hopf-receipts\n python scripts/run_hopf369_br39_42_bounded.py --part fast --output /tmp/hopf-receipts
  python scripts/run_hopf369_br39_42_bounded.py --part heavy --output /tmp/hopf-receipts
  python scripts/run_hopf369_br39_42_bounded.py --part all --output /tmp/hopf-receipts
 
@@ -89,6 +89,14 @@ PARTS={
     *[(f"BR78.{part}","check_hopf369_br78_tension_bianchi_ward.py",("--part",part)) for part in ("vacuum","matter","symbol","negative")],
   ],
   "heavy":[
+    ("BR79.initial","check_hopf369_br79_bn_adm_initial_bridge.py",("--part","cauchy")),
+    ("BR79.momentum","check_hopf369_br79_bn_adm_initial_bridge.py",("--part","momentum")),
+    ("BR79.owners","check_hopf369_br79_bn_adm_initial_bridge.py",("--part","owners")),
+    ("BR80.current","check_hopf369_br80_adm_energy_current.py",("--part","current")),
+    ("BR80.stress","check_hopf369_br80_adm_energy_current.py",("--part","stress")),
+    ("BR80.source","check_hopf369_br80_adm_energy_current.py",("--part","source")),
+    ("BR80.refusal","check_hopf369_br80_adm_energy_current.py",("--part","refusal")),
+    *[(f"BR81.{p}","check_hopf369_br81_existing_ak_bn_lapse_bridge.py",("--part",p)) for p in ("reference","lapse","junction","refusal")],
     ("BR74.graph","check_hopf369_br74_nonlinear_graph_codazzi.py",("--part","graph")),
     ("BR75.sample","check_hopf369_br75_nonlinear_graph_gauss.py",("--part","sample")),
     ("BR76.formula","check_hopf369_br76_adm_moving_energy_flux.py",("--part","formula")),
@@ -128,9 +136,15 @@ def manifest_hash():
     # Include all directly used original operators and test sources; changes
     # anywhere relevant invalidate cached PASS. This is intentionally
     # conservative: new source commits force independent replay.
-    paths=[ROOT/"DASHI/Physics/Foundations/Hopf369WarpedPhysicalBoundaryExact.agda"]
-    paths+=sorted(SCRIPTS.glob("check_hopf369_br*.py"))
-    paths+=sorted(SCRIPTS.glob("check_hopf369_bs*.py"))
+    # Include all original spatial constraint producers (BL/BM/BN/AK),
+    # as well as BR/BS consumers and pinned source receipts. Without
+    # these a cached PASS could survive a change to the source operator.
+    paths=sorted(SCRIPTS.glob("check_hopf369_*.py"))
+    paths+=sorted(SCRIPTS.glob("hopf369_*.py"))
+    paths+=sorted((ROOT/"DASHI/Physics/Foundations").glob("Hopf369*.agda"))
+    path_artifacts=ROOT/"Artifacts/hopf369"
+    if path_artifacts.is_dir():
+        paths+=sorted(p for p in path_artifacts.rglob("*") if p.is_file())
     paths.append(Path(__file__).resolve())
     h=hashlib.sha256()
     for p in paths:
@@ -180,7 +194,7 @@ def stage(label,script,args,receipts,identity,seconds):
 
 def main():
     parser=argparse.ArgumentParser()
-    parser.add_argument("--part",choices=("fast","heavy","frontier","all"),default="frontier")
+    parser.add_argument("--part",choices=("fast","heavy","frontier","closure","all"),default="frontier")
     parser.add_argument("--output",type=Path,required=True)
     parser.add_argument("--seconds",type=int,default=90)
     args=parser.parse_args()
@@ -189,9 +203,12 @@ def main():
     ident=manifest_hash()
     if args.part=="all":
         plans=PARTS["fast"]+PARTS["heavy"]
+    elif args.part=="closure":
+        plans=[p for group in ("fast","heavy") for p in PARTS[group]
+               if p[0].split(".")[0] in {"BR79","BR80","BR81"}]
     elif args.part=="frontier":
         plans=[p for group in ("fast","heavy") for p in PARTS[group]
-               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78"}]
+               if p[0].split(".")[0] in {"BR52","BR53","BR54","BR55","BR56","BR57","BR58","BR59","BR60","BR61","BR62","BR63","BR64","BR65","BR66","BR67","BR68","BR69","BR70","BR71","BR72","BR73","BR74","BR75","BR76","BR77","BR78","BR79","BR80","BR81"}]
     else:
         plans=PARTS[args.part]
     outcome={}
