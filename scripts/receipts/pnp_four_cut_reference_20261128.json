@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-28",
+  "status": "LOCAL_REFERENCE_PASS_NATIVE_KERNEL_PENDING",
+  "execution": {
+    "environment": "local Python; combined connector-retrieved transcribed donors; not full repository checkout",
+    "timeout_per_batch_seconds": 90,
+    "checkpoint": "atomic JSON after each case",
+    "completed_batches": 16,
+    "all_exit_codes": 0,
+    "local_campaign_sha256": "53b5beeb128afbbee10114cc3696e31028912d59544b6d3b79aee12ee1bc1494",
+    "repository_import_variant": "scripts/check_pnp_four_cut_reference_campaign.py",
+    "repository_import_variant_commit": "0fd041367e54ad3775156e10b6866f4123ee3ffa",
+    "repository_import_variant_executed": false
+  },
+  "native": {
+    "next": 256,
+    "total": 256,
+    "counts": {
+      "cases": 256,
+      "points": 4587,
+      "accepted": 4391,
+      "gate_evals": 387048,
+      "max_gates": 508
+    }
+  },
+  "switch": {
+    "next": 256,
+    "total": 256,
+    "counts": {
+      "cases": 256,
+      "sat": 90,
+      "unsat": 166,
+      "original_points": 28646,
+      "lifted_points": 229168,
+      "sat_witnesses": 5720,
+      "portfolio_IMPROVED": 90,
+      "unknown_sat": 0,
+      "portfolio_UNKNOWN": 166
+    }
+  },
+  "window": {
+    "next": 1024,
+    "total": 1024,
+    "counts": {
+      "cases": 1024,
+      "steps": 12276
+    }
+  },
+  "clock": {
+    "next": 1024,
+    "total": 1024,
+    "counts": {
+      "cases": 1024,
+      "positive_obstructed": 1024
+    }
+  },
+  "limitations": [
+    "No Agda or Lean executable; native proof sources unelaborated.",
+    "GitHub DNS unavailable in local environment; complete repository import campaign not run.",
+    "Clock tests exercise arithmetic premises, not full virtual machine compilation.",
+    "Native reference tests exercise threshold DAG and canonical CNF assignment semantics; no claim of universal witness discovery.",
+    "All empty switch instances remain UNKNOWN, not certified empty."
+  ]
+}
